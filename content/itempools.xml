@@ -1,0 +1,10 @@
+<ItemPools>
+    <!--
+        海克斯道具池 (hextech)
+        初版为空，复用原版 treasure 池
+        后续在此添加自定义道具池内容
+    -->
+    <Pool Name="hextech">
+        <!-- 待填充道具 -->
+    </Pool>
+</ItemPools>
