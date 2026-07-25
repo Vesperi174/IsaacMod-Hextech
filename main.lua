@@ -11,6 +11,8 @@ local SCRIPTS = {
     "hextech_pool",
     "pedestal_spawner",
     "callbacks",
+    "items.tapdancer",
+    "eid_integration",
 }
 
 for _, script in ipairs(SCRIPTS) do

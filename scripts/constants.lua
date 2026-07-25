@@ -7,3 +7,6 @@ mod.HEXTECH_CONFIG = {
     MAX_STAGE = 4,
     ITEM_POOL = ItemPoolType.POOL_DEVIL,
 }
+
+mod.ITEMS = {}
+mod.ITEMS.TAPDANCER = Isaac.GetItemIdByName("Hextech Tapdancer")

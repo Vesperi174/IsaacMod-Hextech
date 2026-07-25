@@ -1,0 +1,11 @@
+<items gfxroot="gfx/items/" version="1">
+  <passive
+    id="1"
+    name="Hextech Tapdancer"
+    cache="speed firedelay"
+    description="踢踏舞！"
+    gfx="tapdancer.png"
+    quality="3"
+    tags="offensive"
+  />
+</items>
