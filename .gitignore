@@ -1,0 +1,18 @@
+# OS generated files
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Lua bytecode cache
+*.luac
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# IDE / Editor
+.vscode/
+.idea/
+*.sublime-workspace
