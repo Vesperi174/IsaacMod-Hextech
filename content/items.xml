@@ -63,4 +63,12 @@
     quality="2"
     tags="offensive"
   />
+  <passive
+    name="Hextech Transmute Prismatic"
+    cache="all"
+    description="质变：棱彩阶！"
+    gfx="transmuteprismatic.png"
+    quality="3"
+    tags="offensive"
+  />
 </items>

@@ -143,4 +143,18 @@ if EID then
         "Hextech Transmute Gold",
         "en_us"
     )
+
+    EID:addCollectible(
+        mod.ITEMS.TRANSMUTEPRISMATIC,
+        "#随机获得一个棱彩阶海克斯道具",
+        "质变：棱彩阶",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.TRANSMUTEPRISMATIC,
+        "#grants a random Prismatic tier hextech item",
+        "Hextech Transmute Prismatic",
+        "en_us"
+    )
 end

@@ -17,3 +17,4 @@ mod.ITEMS.STATSONSTATSONSTATS = Isaac.GetItemIdByName("Hextech StatsonStatsonSta
 mod.ITEMS.SLOWANDSTEADY = Isaac.GetItemIdByName("Hextech Slow and Steady")
 mod.ITEMS.DEFT = Isaac.GetItemIdByName("Hextech Deft")
 mod.ITEMS.TRANSMUTEGOLD = Isaac.GetItemIdByName("Hextech Transmute Gold")
+mod.ITEMS.TRANSMUTEPRISMATIC = Isaac.GetItemIdByName("Hextech Transmute Prismatic")

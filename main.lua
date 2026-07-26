@@ -17,6 +17,7 @@ local SCRIPTS = {
     "items.slowandsteady",
     "items.deft",
     "items.transmutegold",
+    "items.transmuteprismatic",
     "eid_integration",
 }
 
