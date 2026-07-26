@@ -2,7 +2,7 @@ local mod = HextechMod
 
 if EID then
     -- ===== 白银阶 (Silver) =====
-    -- L1
+    -- L2
     EID:addCollectible(
         mod.ITEMS.BLUNTFORCE,
         "#攻击力 ×1.2",
@@ -69,7 +69,22 @@ if EID then
         "en_us"
     )
 
-    -- L2
+    EID:addCollectible(
+        mod.ITEMS.SILVERSPOON,
+        "#{{Damage}} 攻击力×（1+0.15×银汤匙数量×拥有的白银阶海克斯数量）"
+        .. "#多个银汤匙可叠加，白银阶海克斯数量越多倍率越高",
+        "银汤匙",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.SILVERSPOON,
+        "#{{Damage}} ×(1+0.15×Silver Spoon count×total Silver tier items owned)"
+        .. "#Multiple Silver Spoons stack, more Silver tier items = higher multiplier",
+        "Hextech Silver Spoon",
+        "en_us"
+    )
+
     EID:addCollectible(
         mod.ITEMS.TRANSMUTEGOLD,
         "#随机获得一个黄金阶海克斯道具",

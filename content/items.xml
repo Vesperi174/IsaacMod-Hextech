@@ -1,6 +1,6 @@
 <items gfxroot="gfx/items/" version="1">
   <!-- ===== 白银阶 (Silver) ===== -->
-  <!-- L1 -->
+  <!-- L2 -->
   <passive
     name="Hextech Blunt Force"
     cache="damage"
@@ -33,7 +33,14 @@
     quality="2"
     tags="offensive"
   />
-  <!-- L2 -->
+  <passive
+    name="Hextech Silver Spoon"
+    cache="damage"
+    description="银汤匙！"
+    gfx="silverspoon.png"
+    quality="2"
+    tags="offensive"
+  />
   <passive
     name="Hextech Transmute Gold"
     cache="all"
@@ -50,7 +57,7 @@
     cache=""
     description="杀戮时间到了！"
     gfx="itskillingtime.png"
-    quality="3"
+    quality="2"
     tags="offensive"
   />
   <passive

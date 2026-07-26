@@ -19,6 +19,7 @@ local SCRIPTS = {
     "items.itskillingtime",
     "items.deft",
     "items.dematerialize",
+    "items.silverspoon",
     "items.transmutegold",
     "items.transmuteprismatic",
     "items.transmutechaos",
