@@ -1,5 +1,10 @@
 # 海克斯科技 (Hextech)
 
+<details open>
+<summary><b>中文</b></summary>
+
+---
+
 基于《英雄联盟》海克斯强化机制的《以撒的结合》模组。每层开局三选一，构筑你的海克斯羁绊。
 
 ---
@@ -72,9 +77,12 @@
 
 MIT License
 
----
+</details>
 
-# Hextech
+<details>
+<summary><b>English</b></summary>
+
+---
 
 A Binding of Isaac mod inspired by the Hextech augment system from League of Legends. Pick one of three at the start of each floor and build your Hextech synergies.
 
@@ -147,3 +155,5 @@ All stat modifications are processed in a unified **additive → multiplicative*
 ## License
 
 MIT License
+
+</details>
