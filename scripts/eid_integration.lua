@@ -37,7 +37,7 @@ if EID then
         mod.ITEMS.STATS,
         "#随机获得2项属性提升"
         .. "#{{Damage}} 攻击力+1 {{Tears}} 射速+0.7"
-        .. "#{{ShotSpeed}} 弹速+0.3 {{Range}} 射程+2.5 {{Speed}} 移速+0.3"
+        .. "# 弹速+0.3 {{Range}} 射程+2.5 {{Speed}} 移速+0.3"
         .. "#{{Luck}} 幸运+1 {{Heart}} 空的心之容器+1"
         .. "#高概率: 弹速/射程/移速 > 中概率: 攻击力/射速 > 低概率: 幸运/心之容器",
         "属性",
@@ -48,7 +48,7 @@ if EID then
         mod.ITEMS.STATS,
         "#Randomly boosts 2 stats"
         .. "#{{Damage}} +1 DMG {{Tears}} +0.7 Tears"
-        .. "#{{ShotSpeed}} +0.3 Shot {{Range}} +2.5 Range {{Speed}} +0.3 Speed"
+        .. "# +0.3 Shot {{Range}} +2.5 Range {{Speed}} +0.3 Speed"
         .. "#{{Luck}} +1 Luck {{Heart}} +1 Empty Heart"
         .. "#High: Shot/Range/Speed > Med: DMG/Tears > Low: Luck/Heart",
         "Hextech Stats",
@@ -59,7 +59,7 @@ if EID then
         mod.ITEMS.STATSONSTATS,
         "#随机获得3项属性提升"
         .. "#{{Damage}} 攻击力+1 {{Tears}} 射速+0.7"
-        .. "#{{ShotSpeed}} 弹速+0.3 {{Range}} 射程+2.5 {{Speed}} 移速+0.3"
+        .. "# 弹速+0.3 {{Range}} 射程+2.5 {{Speed}} 移速+0.3"
         .. "#{{Luck}} 幸运+1 {{Heart}} 空的心之容器+1"
         .. "#高概率: 弹速/射程/移速 > 中概率: 攻击力/射速 > 低概率: 幸运/心之容器",
         "属性叠属性",
@@ -70,7 +70,7 @@ if EID then
         mod.ITEMS.STATSONSTATS,
         "#Randomly boosts 3 stats"
         .. "#{{Damage}} +1 DMG {{Tears}} +0.7 Tears"
-        .. "#{{ShotSpeed}} +0.3 Shot {{Range}} +2.5 Range {{Speed}} +0.3 Speed"
+        .. "# +0.3 Shot {{Range}} +2.5 Range {{Speed}} +0.3 Speed"
         .. "#{{Luck}} +1 Luck {{Heart}} +1 Empty Heart"
         .. "#High: Shot/Range/Speed > Med: DMG/Tears > Low: Luck/Heart",
         "Hextech Double Stats",
@@ -81,7 +81,7 @@ if EID then
         mod.ITEMS.STATSONSTATSONSTATS,
         "#随机获得4项属性提升"
         .. "#{{Damage}} 攻击力+1 {{Tears}} 射速+0.7"
-        .. "#{{ShotSpeed}} 弹速+0.3 {{Range}} 射程+2.5 {{Speed}} 移速+0.3"
+        .. "# 弹速+0.3 {{Range}} 射程+2.5 {{Speed}} 移速+0.3"
         .. "#{{Luck}} 幸运+1 {{Heart}} 空的心之容器+1"
         .. "#高概率: 弹速/射程/移速 > 中概率: 攻击力/射速 > 低概率: 幸运/心之容器",
         "属性叠属性叠属性",
@@ -92,7 +92,7 @@ if EID then
         mod.ITEMS.STATSONSTATSONSTATS,
         "#Randomly boosts 4 stats"
         .. "#{{Damage}} +1 DMG {{Tears}} +0.7 Tears"
-        .. "#{{ShotSpeed}} +0.3 Shot {{Range}} +2.5 Range {{Speed}} +0.3 Speed"
+        .. "# +0.3 Shot {{Range}} +2.5 Range {{Speed}} +0.3 Speed"
         .. "#{{Luck}} +1 Luck {{Heart}} +1 Empty Heart"
         .. "#High: Shot/Range/Speed > Med: DMG/Tears > Low: Luck/Heart",
         "Hextech Triple Stats",
@@ -127,6 +127,20 @@ if EID then
         mod.ITEMS.DEFT,
         "#{{Tears}} +1.20 fire rate",
         "Hextech Deft",
+        "en_us"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.TRANSMUTEGOLD,
+        "#随机获得一个黄金阶海克斯道具",
+        "质变：黄金阶",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.TRANSMUTEGOLD,
+        "#grants a random Gold tier hextech item",
+        "Hextech Transmute Gold",
         "en_us"
     )
 end

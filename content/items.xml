@@ -52,7 +52,15 @@
     cache="firedelay"
     description="灵巧！"
     gfx="deft.png"
-    quality="1"
+    quality="2"
+    tags="offensive"
+  />
+  <passive
+    name="Hextech Transmute Gold"
+    cache="all"
+    description="质变：黄金阶！"
+    gfx="transmutegold.png"
+    quality="2"
     tags="offensive"
   />
 </items>
