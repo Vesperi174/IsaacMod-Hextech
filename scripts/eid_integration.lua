@@ -116,4 +116,17 @@ if EID then
         "Hextech Slow and Steady",
         "en_us"
     )
+    EID:addCollectible(
+        mod.ITEMS.DEFT,
+        "#{{Tears}} 攻击速度+1.20",
+        "灵巧",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.DEFT,
+        "#{{Tears}} +1.20 fire rate",
+        "Hextech Deft",
+        "en_us"
+    )
 end

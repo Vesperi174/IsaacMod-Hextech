@@ -15,6 +15,7 @@ local SCRIPTS = {
     "items.bluntforce",
     "items.stats",
     "items.slowandsteady",
+    "items.deft",
     "eid_integration",
 }
 
