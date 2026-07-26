@@ -20,6 +20,7 @@ local SCRIPTS = {
     "items.transmuteprismatic",
     "items.transmutechaos",
     "items.celestialbody",
+    "items.jeweledgauntlet",
     "eid_integration",
 }
 
