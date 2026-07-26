@@ -5,12 +5,6 @@ local DAMAGE_MULT = 3.0
 function mod:onBackToBasicsUpdate(player)
     if not player:HasCollectible(mod.ITEMS.BACKTOBASICS) then return end
 
-    for i = 0, 3 do
-        if player:GetActiveItem(i) > 0 then
-            player:SetActiveCharge(0, i)
-        end
-    end
-
     local held = player:GetTrinket(0)
     if held ~= 0 then
         player:TryRemoveTrinket(held)
@@ -25,6 +19,14 @@ function mod:onBackToBasicsUpdate(player)
 end
 
 mod:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, mod.onBackToBasicsUpdate)
+
+function mod:onBackToBasicsPreUse(collectibleType, rng, player)
+    if player:HasCollectible(mod.ITEMS.BACKTOBASICS) then
+        return { Discharge = false, ShowAnim = false, PlaySound = false }
+    end
+end
+
+mod:AddCallback(ModCallbacks.MC_PRE_USE_ITEM, mod.onBackToBasicsPreUse)
 
 mod.DamagePipeline:Register({
     type = mod.DamagePipeline.MULTIPLY,
