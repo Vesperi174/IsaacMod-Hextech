@@ -157,4 +157,18 @@ if EID then
         "Hextech Transmute Prismatic",
         "en_us"
     )
+
+    EID:addCollectible(
+        mod.ITEMS.TRANSMUTECHAOS,
+        "#随机获得两个海克斯道具，品质随机",
+        "质变：混沌阶",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.TRANSMUTECHAOS,
+        "#grants 2 random hextech items of any tier",
+        "Hextech Transmute Chaos",
+        "en_us"
+    )
 end

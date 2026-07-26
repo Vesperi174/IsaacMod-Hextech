@@ -18,6 +18,7 @@ local SCRIPTS = {
     "items.deft",
     "items.transmutegold",
     "items.transmuteprismatic",
+    "items.transmutechaos",
     "eid_integration",
 }
 
