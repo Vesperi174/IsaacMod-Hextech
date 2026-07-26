@@ -1,49 +1,11 @@
 <items gfxroot="gfx/items/" version="1">
-  <passive
-    name="Hextech Tapdancer"
-    cache="speed firedelay"
-    description="踢踏舞！"
-    gfx="tapdancer.png"
-    quality="3"
-    tags="offensive"
-  />
+  <!-- ===== 白银阶 (Silver) ===== -->
+  <!-- L1 -->
   <passive
     name="Hextech Blunt Force"
     cache="damage"
     description="大力！"
     gfx="bluntforce.png"
-    quality="2"
-    tags="offensive"
-  />
-  <passive
-    name="Hextech Stats"
-    cache="all"
-    description="属性！"
-    gfx="stats.png"
-    quality="2"
-    tags="offensive"
-  />
-  <passive
-    name="Hextech StatsonStats"
-    cache="all"
-    description="属性叠属性！"
-    gfx="statsonstats.png"
-    quality="3"
-    tags="offensive"
-  />
-  <passive
-    name="Hextech StatsonStatsonStats"
-    cache="all"
-    description="属性叠属性叠属性！"
-    gfx="statsonstatsonstats.png"
-    quality="4"
-    tags="offensive"
-  />
-  <passive
-    name="Hextech Slow and Steady"
-    cache="firedelay"
-    description="一板一眼！"
-    gfx="slowandsteady.png"
     quality="2"
     tags="offensive"
   />
@@ -56,6 +18,23 @@
     tags="offensive"
   />
   <passive
+    name="Hextech Dematerialize"
+    cache=""
+    description="去质！"
+    gfx="dematerialize.png"
+    quality="2"
+    tags="offensive"
+  />
+  <passive
+    name="Hextech Stats"
+    cache="all"
+    description="属性！"
+    gfx="stats.png"
+    quality="2"
+    tags="offensive"
+  />
+  <!-- L2 -->
+  <passive
     name="Hextech Transmute Gold"
     cache="all"
     description="质变：黄金阶！"
@@ -63,20 +42,24 @@
     quality="2"
     tags="offensive"
   />
+
+  <!-- ===== 黄金阶 (Gold) ===== -->
+  <!-- L2 -->
   <passive
-    name="Hextech Transmute Prismatic"
-    cache="all"
-    description="质变：棱彩阶！"
-    gfx="transmuteprismatic.png"
-    quality="3"
+    name="Hextech Slow and Steady"
+    cache="firedelay"
+    description="一板一眼！"
+    gfx="slowandsteady.png"
+    quality="2"
     tags="offensive"
   />
+  <!-- L3 -->
   <passive
-    name="Hextech Transmute Chaos"
-    cache="all"
-    description="质变：混沌阶！"
-    gfx="transmutechaos.png"
-    quality="4"
+    name="Hextech Apex Inventor"
+    cache=""
+    description="尖端发明家！"
+    gfx="apexinventor.png"
+    quality="3"
     tags="offensive"
   />
   <passive
@@ -88,6 +71,33 @@
     tags="offensive"
   />
   <passive
+    name="Hextech StatsonStats"
+    cache="all"
+    description="属性叠属性！"
+    gfx="statsonstats.png"
+    quality="3"
+    tags="offensive"
+  />
+  <passive
+    name="Hextech Transmute Prismatic"
+    cache="all"
+    description="质变：棱彩阶！"
+    gfx="transmuteprismatic.png"
+    quality="3"
+    tags="offensive"
+  />
+
+  <!-- ===== 棱彩阶 (Prismatic) ===== -->
+  <!-- L4 -->
+  <passive
+    name="Hextech Back to Basics"
+    cache=""
+    description="回归基本功！"
+    gfx="backtobasics.png"
+    quality="4"
+    tags="offensive"
+  />
+  <passive
     name="Hextech Jeweled Gauntlet"
     cache="damage"
     description="珠光护手！"
@@ -96,18 +106,26 @@
     tags="offensive"
   />
   <passive
-    name="Hextech Apex Inventor"
-    cache=""
-    description="尖端发明家！"
-    gfx="apexinventor.png"
+    name="Hextech StatsonStatsonStats"
+    cache="all"
+    description="属性叠属性叠属性！"
+    gfx="statsonstatsonstats.png"
+    quality="4"
+    tags="offensive"
+  />
+  <passive
+    name="Hextech Tapdancer"
+    cache="speed firedelay"
+    description="踢踏舞！"
+    gfx="tapdancer.png"
     quality="3"
     tags="offensive"
   />
   <passive
-    name="Hextech Back to Basics"
-    cache=""
-    description="回归基本功！"
-    gfx="backtobasics.png"
+    name="Hextech Transmute Chaos"
+    cache="all"
+    description="质变：混沌阶！"
+    gfx="transmutechaos.png"
     quality="4"
     tags="offensive"
   />

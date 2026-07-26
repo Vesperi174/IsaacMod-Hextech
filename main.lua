@@ -17,6 +17,7 @@ local SCRIPTS = {
     "items.stats",
     "items.slowandsteady",
     "items.deft",
+    "items.dematerialize",
     "items.transmutegold",
     "items.transmuteprismatic",
     "items.transmutechaos",

@@ -79,6 +79,7 @@ end
 mod.HextechPool:Register(mod.ITEMS.TAPDANCER, mod.HextechPool.PRISMATIC, 4)
 mod.HextechPool:Register(mod.ITEMS.BLUNTFORCE, mod.HextechPool.SILVER, 1)
 mod.HextechPool:Register(mod.ITEMS.DEFT, mod.HextechPool.SILVER, 1)
+mod.HextechPool:Register(mod.ITEMS.DEMATERIALIZE, mod.HextechPool.SILVER, 1)
 mod.HextechPool:Register(mod.ITEMS.TRANSMUTEGOLD, mod.HextechPool.SILVER, 2)
 mod.HextechPool:Register(mod.ITEMS.TRANSMUTEPRISMATIC, mod.HextechPool.GOLD, 3)
 mod.HextechPool:Register(mod.ITEMS.TRANSMUTECHAOS, mod.HextechPool.PRISMATIC, 4)
