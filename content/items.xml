@@ -92,7 +92,7 @@
     cache="damage"
     description="珠光护手！"
     gfx="jeweledgauntlet.png"
-    quality="3"
+    quality="4"
     tags="offensive"
   />
 </items>
