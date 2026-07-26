@@ -50,6 +50,7 @@ mod.HextechPool:Register(mod.ITEMS.BLUNTFORCE, mod.HextechPool.SILVER, 1)
 mod.HextechPool:Register(mod.ITEMS.STATS, mod.HextechPool.SILVER, 1)
 mod.HextechPool:Register(mod.ITEMS.STATSONSTATS, mod.HextechPool.GOLD, 1)
 mod.HextechPool:Register(mod.ITEMS.STATSONSTATSONSTATS, mod.HextechPool.PRISMATIC, 1)
+mod.HextechPool:Register(mod.ITEMS.SLOWANDSTEADY, mod.HextechPool.PRISMATIC, 1)
 
 Isaac.ConsoleOutput("[hextech] Prismatic: " .. #mod.HextechPool.items[mod.HextechPool.PRISMATIC] .. "\n")
 Isaac.ConsoleOutput("[hextech] Gold: " .. #mod.HextechPool.items[mod.HextechPool.GOLD] .. "\n")

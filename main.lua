@@ -14,6 +14,7 @@ local SCRIPTS = {
     "items.tapdancer",
     "items.bluntforce",
     "items.stats",
+    "items.slowandsteady",
     "eid_integration",
 }
 

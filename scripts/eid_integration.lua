@@ -98,4 +98,22 @@ if EID then
         "Hextech Triple Stats",
         "en_us"
     )
+
+    EID:addCollectible(
+        mod.ITEMS.SLOWANDSTEADY,
+        "#攻击速度锁定为0.67"
+        .. "#{{Damage}} 超出/不足部分以2倍转化为攻击力加成/削减"
+        .. "#{{Tears}} 低于0.67攻速会降低攻击力",
+        "一板一眼",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.SLOWANDSTEADY,
+        "#Locks fire rate to 0.67"
+        .. "#{{Damage}} Excess/deficit converted to damage at 2x rate"
+        .. "#{{Tears}} Fire rate below 0.67 reduces damage",
+        "Hextech Slow and Steady",
+        "en_us"
+    )
 end
