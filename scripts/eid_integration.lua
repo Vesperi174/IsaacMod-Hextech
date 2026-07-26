@@ -171,4 +171,20 @@ if EID then
         "Hextech Transmute Chaos",
         "en_us"
     )
+
+    EID:addCollectible(
+        mod.ITEMS.CELESTIALBODY,
+        "#获得4个心之容器，回复4红心，{{Damage}} 伤害倍率×0.8"
+        .. "#多次获取无额外效果",
+        "星界躯体",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.CELESTIALBODY,
+        "#+4 heart containers, heals 4 hearts, {{Damage}} damage ×0.8"
+        .. "#No additional effect from multiple copies",
+        "Hextech Celestial Body",
+        "en_us"
+    )
 end

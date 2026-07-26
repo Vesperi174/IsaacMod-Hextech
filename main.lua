@@ -19,6 +19,7 @@ local SCRIPTS = {
     "items.transmutegold",
     "items.transmuteprismatic",
     "items.transmutechaos",
+    "items.celestialbody",
     "eid_integration",
 }
 

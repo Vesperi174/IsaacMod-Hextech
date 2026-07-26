@@ -67,8 +67,16 @@ function mod:onStatsUpdate(player)
         local lastCount = playerCounts[idx][itemId] or 0
 
         if count ~= lastCount then
-            local totalRolls = count * ROLLS_PER_ITEM[itemId]
-            playerAwards[idx][itemId] = rollAwards(totalRolls)
+            if count > lastCount and playerAwards[idx][itemId] then
+                local newRolls = (count - lastCount) * ROLLS_PER_ITEM[itemId]
+                local newAwards = rollAwards(newRolls)
+                for k, v in pairs(newAwards) do
+                    playerAwards[idx][itemId][k] = (playerAwards[idx][itemId][k] or 0) + v
+                end
+            else
+                local totalRolls = count * ROLLS_PER_ITEM[itemId]
+                playerAwards[idx][itemId] = rollAwards(totalRolls)
+            end
             playerCounts[idx][itemId] = count
 
             local newHearts = math.floor((playerAwards[idx][itemId].maxHearts or 0) * 2)
