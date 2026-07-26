@@ -190,7 +190,7 @@ if EID then
 
     EID:addCollectible(
         mod.ITEMS.JEWELEDGAUNTLET,
-        "#每次攻击随机获得{{Damage}} 伤害倍率1.25~2.0"
+        "#获得每秒变化的伤害倍率，范围为1.50~2.25"
         .. "#每多一个提升0.5倍率上限",
         "珠光护手",
         "zh_cn"
@@ -198,7 +198,7 @@ if EID then
 
     EID:addCollectible(
         mod.ITEMS.JEWELEDGAUNTLET,
-        "#Each attack gains random {{Damage}} damage multiplier 1.25~2.0"
+        "#Grants a damage multiplier that changes every second, range 1.50~2.25"
         .. "#+0.5 to multiplier range per extra copy",
         "Hextech Jeweled Gauntlet",
         "en_us"

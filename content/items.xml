@@ -89,10 +89,10 @@
   />
   <passive
     name="Hextech Jeweled Gauntlet"
-    cache="all"
+    cache="damage"
     description="珠光护手！"
     gfx="jeweledgauntlet.png"
-    quality="4"
+    quality="3"
     tags="offensive"
   />
 </items>
