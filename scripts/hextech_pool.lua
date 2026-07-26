@@ -89,6 +89,7 @@ mod.HextechPool:Register(mod.ITEMS.STATS, mod.HextechPool.SILVER, 1)
 mod.HextechPool:Register(mod.ITEMS.STATSONSTATS, mod.HextechPool.GOLD, 3)
 mod.HextechPool:Register(mod.ITEMS.STATSONSTATSONSTATS, mod.HextechPool.PRISMATIC, 4)
 mod.HextechPool:Register(mod.ITEMS.SLOWANDSTEADY, mod.HextechPool.GOLD, 2)
+mod.HextechPool:Register(mod.ITEMS.ITSKILLINGTIME, mod.HextechPool.GOLD, 2)
 mod.HextechPool:Register(mod.ITEMS.APEXINVENTOR, mod.HextechPool.GOLD, 3)
 mod.HextechPool:Register(mod.ITEMS.BACKTOBASICS, mod.HextechPool.PRISMATIC, 4)
 

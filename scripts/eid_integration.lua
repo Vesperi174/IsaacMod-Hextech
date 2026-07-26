@@ -104,6 +104,24 @@ if EID then
         "en_us"
     )
 
+    EID:addCollectible(
+        mod.ITEMS.ITSKILLINGTIME,
+        "#使用主动道具后，记录接下来5秒内对敌人造成的伤害"
+        .. "#5秒后，对房间内所有敌人造成等量伤害"
+        .. "#多次获取无额外效果",
+        "杀戮时间到了",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.ITSKILLINGTIME,
+        "#After using an active item, records damage dealt to enemies for 5 seconds"
+        .. "#After 5 seconds, deals that damage to all enemies in the room"
+        .. "#No additional effect from multiple copies",
+        "Hextech It's Killing Time",
+        "en_us"
+    )
+
     -- L3
     EID:addCollectible(
         mod.ITEMS.APEXINVENTOR,

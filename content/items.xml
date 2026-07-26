@@ -46,6 +46,14 @@
   <!-- ===== 黄金阶 (Gold) ===== -->
   <!-- L2 -->
   <passive
+    name="Hextech It's Killing Time"
+    cache=""
+    description="杀戮时间到了！"
+    gfx="itskillingtime.png"
+    quality="3"
+    tags="offensive"
+  />
+  <passive
     name="Hextech Slow and Steady"
     cache="firedelay"
     description="一板一眼！"

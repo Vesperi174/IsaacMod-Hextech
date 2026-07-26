@@ -16,6 +16,7 @@ local SCRIPTS = {
     "items.bluntforce",
     "items.stats",
     "items.slowandsteady",
+    "items.itskillingtime",
     "items.deft",
     "items.dematerialize",
     "items.transmutegold",
