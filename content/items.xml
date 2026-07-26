@@ -41,7 +41,7 @@
   />
   <passive
     name="Hextech Slow and Steady"
-    cache="damage firedelay"
+    cache="firedelay"
     description="一板一眼！"
     gfx="slowandsteady.png"
     quality="2"

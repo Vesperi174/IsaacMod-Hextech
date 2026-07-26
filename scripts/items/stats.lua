@@ -110,9 +110,6 @@ function mod:onStatsCache(player, flag)
         end
     end
 
-    if flag & CacheFlag.CACHE_DAMAGE ~= 0 then
-        player.Damage = player.Damage + total.damage
-    end
     if flag & CacheFlag.CACHE_FIREDELAY ~= 0 then
         local baseTears = 30 / (player.MaxFireDelay + 1)
         local newTears = baseTears + total.tears
@@ -134,3 +131,18 @@ end
 
 mod:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, mod.onStatsUpdate)
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.onStatsCache)
+
+mod.DamagePipeline:Register({
+    type = mod.DamagePipeline.FLAT,
+    callback = function(player, base)
+        local idx = player.ControllerIndex
+        local total = 0
+        for _, itemId in ipairs(STATS_ITEMS) do
+            local awards = playerAwards[idx][itemId]
+            if awards then
+                total = total + (awards.damage or 0)
+            end
+        end
+        return total > 0 and total or nil
+    end,
+})

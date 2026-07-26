@@ -27,10 +27,16 @@ function mod:onJeweledGauntletUpdate(player)
         local maxMult = BASE_MAX + bonus
         data.currentMult = minMult + math.random() * (maxMult - minMult)
     end
-
-    if data.currentMult then
-        player.Damage = player.Damage * data.currentMult
-    end
 end
 
 mod:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, mod.onJeweledGauntletUpdate)
+
+mod.DamagePipeline:Register({
+    type = mod.DamagePipeline.MULTIPLY,
+    callback = function(player, raw, current)
+        if not player:HasCollectible(mod.ITEMS.JEWELEDGAUNTLET) then return nil end
+        local data = playerData[player.ControllerIndex]
+        if not data or not data.currentMult then return nil end
+        return data.currentMult
+    end,
+})

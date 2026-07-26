@@ -14,9 +14,6 @@ function mod:onSlowAndSteadyCache(player, flag)
         playerData[idx] = {}
     end
 
-    if flag & CacheFlag.CACHE_DAMAGE ~= 0 then
-        playerData[idx].baseDamage = player.Damage
-    end
     if flag & CacheFlag.CACHE_FIREDELAY ~= 0 then
         playerData[idx].baseMaxFireDelay = player.MaxFireDelay
     end
@@ -31,10 +28,9 @@ function mod:onSlowAndSteadyUpdate(player)
     end
     local data = playerData[idx]
 
-    if not data.baseDamage or not data.baseMaxFireDelay then
-        data.baseDamage = player.Damage
+    if not data.baseMaxFireDelay then
         data.baseMaxFireDelay = player.MaxFireDelay
-        player:AddCacheFlags(CacheFlag.CACHE_DAMAGE | CacheFlag.CACHE_FIREDELAY)
+        player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY)
         player:EvaluateItems()
         return
     end
@@ -46,13 +42,24 @@ function mod:onSlowAndSteadyUpdate(player)
         data.baseMaxFireDelay = currentMaxFireDelay
     end
 
-    local normalTears = 30 / (data.baseMaxFireDelay + 1)
-    local delta = normalTears - TARGET_TEARS
-    local damageBonus = delta * CONVERSION_RATE
-
-    player.Damage = data.baseDamage + damageBonus
     player.MaxFireDelay = lockedFireDelay
 end
 
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.onSlowAndSteadyCache)
 mod:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, mod.onSlowAndSteadyUpdate)
+
+mod.DamagePipeline:Register({
+    type = mod.DamagePipeline.FLAT,
+    callback = function(player, raw, current)
+        if not player:HasCollectible(mod.ITEMS.SLOWANDSTEADY) then return nil end
+        local idx = player.ControllerIndex
+        local data = playerData[idx]
+        if not data or not data.baseMaxFireDelay then return nil end
+
+        local normalTears = 30 / (data.baseMaxFireDelay + 1)
+        local delta = normalTears - TARGET_TEARS
+        if delta <= 0 then return nil end
+
+        return delta * CONVERSION_RATE
+    end,
+})

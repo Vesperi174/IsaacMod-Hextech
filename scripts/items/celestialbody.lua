@@ -7,14 +7,6 @@ local HEAL_AMOUNT = 4
 
 local playerData = {}
 
-function mod:onCelestialBodyCache(player, flag)
-    if not player:HasCollectible(mod.ITEMS.CELESTIALBODY) then return end
-
-    if flag & CacheFlag.CACHE_DAMAGE ~= 0 then
-        player.Damage = player.Damage * DAMAGE_MULTIPLIER
-    end
-end
-
 function mod:onCelestialBodyUpdate(player)
     if not player:HasCollectible(mod.ITEMS.CELESTIALBODY) then return end
 
@@ -30,5 +22,12 @@ function mod:onCelestialBodyUpdate(player)
     end
 end
 
-mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.onCelestialBodyCache)
 mod:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, mod.onCelestialBodyUpdate)
+
+mod.DamagePipeline:Register({
+    type = mod.DamagePipeline.MULTIPLY,
+    callback = function(player, raw, current)
+        if not player:HasCollectible(mod.ITEMS.CELESTIALBODY) then return nil end
+        return DAMAGE_MULTIPLIER
+    end,
+})

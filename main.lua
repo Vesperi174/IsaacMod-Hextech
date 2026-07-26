@@ -10,6 +10,7 @@ local SCRIPTS = {
     "utils",
     "hextech_pool",
     "pedestal_spawner",
+    "damage_pipeline",
     "callbacks",
     "items.tapdancer",
     "items.bluntforce",
