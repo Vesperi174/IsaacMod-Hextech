@@ -21,14 +21,14 @@ if EID then
 
     EID:addCollectible(
         mod.ITEMS.BLUNTFORCE,
-        "#攻击力额外获得20%当前攻击力加成",
+        "#攻击力 ×1.2",
         "大力",
         "zh_cn"
     )
 
     EID:addCollectible(
         mod.ITEMS.BLUNTFORCE,
-        "#{{Damage}} +20% of current damage as bonus damage",
+        "#{{Damage}} ×1.2",
         "Hextech Blunt Force",
         "en_us"
     )
