@@ -37,7 +37,8 @@ function mod:onTapdancerHit(target, amount, flag, source, countdown)
 end
 
 function mod:onTapdancerUpdate(player)
-    if not player:HasCollectible(mod.ITEMS.TAPDANCER) then return end
+    local count = player:GetCollectibleNum(mod.ITEMS.TAPDANCER)
+    if count <= 0 then return end
 
     local idx = player.ControllerIndex
     local data = playerData[idx]
@@ -57,13 +58,13 @@ function mod:onTapdancerUpdate(player)
 
     if data.stacks > 0 then
         local base = data.baseSpeed or player.MoveSpeed
-        player.MoveSpeed = base + data.stacks * STACK_SPEED
+        player.MoveSpeed = base + data.stacks * STACK_SPEED * count
     end
 
     local speed = player.MoveSpeed
     local baseFireDelay = data.baseFireDelay or player.MaxFireDelay
     local baseTears = 30 / (baseFireDelay + 1)
-    local effectiveTears = baseTears + FIRERATE_RATIO * speed
+    local effectiveTears = baseTears + FIRERATE_RATIO * speed * count
     player.MaxFireDelay = math.max(0, 30 / effectiveTears - 1)
 end
 

@@ -6,7 +6,8 @@ local DAMAGE_RATIO = 0.2
 local playerData = {}
 
 function mod:onBluntForceCache(player, flag)
-    if not player:HasCollectible(mod.ITEMS.BLUNTFORCE) then return end
+    local count = player:GetCollectibleNum(mod.ITEMS.BLUNTFORCE)
+    if count <= 0 then return end
 
     local idx = player.ControllerIndex
     if not playerData[idx] then
@@ -19,18 +20,14 @@ function mod:onBluntForceCache(player, flag)
 end
 
 function mod:onBluntForceUpdate(player)
-    if not player:HasCollectible(mod.ITEMS.BLUNTFORCE) then return end
+    local count = player:GetCollectibleNum(mod.ITEMS.BLUNTFORCE)
+    if count <= 0 then return end
 
     local idx = player.ControllerIndex
-    if not playerData[idx] then
-        playerData[idx] = {}
-        return
-    end
+    local data = playerData[idx]
+    if not data or not data.baseDamage then return end
 
-    local baseDamage = playerData[idx].baseDamage
-    if baseDamage then
-        player.Damage = baseDamage + baseDamage * DAMAGE_RATIO
-    end
+    player.Damage = data.baseDamage + data.baseDamage * DAMAGE_RATIO * count
 end
 
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.onBluntForceCache)

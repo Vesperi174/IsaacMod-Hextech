@@ -11,14 +11,16 @@ local AWARDS = {
     { type = "maxHearts", value = 1.0, weight = 2 },
 }
 
-local ROLL_COUNTS = {}
-ROLL_COUNTS[mod.ITEMS.STATS] = 2
-ROLL_COUNTS[mod.ITEMS.STATSONSTATS] = 3
-ROLL_COUNTS[mod.ITEMS.STATSONSTATSONSTATS] = 4
+local ROLLS_PER_ITEM = {}
+ROLLS_PER_ITEM[mod.ITEMS.STATS] = 2
+ROLLS_PER_ITEM[mod.ITEMS.STATSONSTATS] = 3
+ROLLS_PER_ITEM[mod.ITEMS.STATSONSTATSONSTATS] = 4
 
-local playerBonuses = {}
-local playerBaseStats = {}
-local processedItems = {}
+local STATS_ITEMS = { mod.ITEMS.STATS, mod.ITEMS.STATSONSTATS, mod.ITEMS.STATSONSTATSONSTATS }
+
+local playerAwards = {}
+local playerHearts = {}
+local playerCounts = {}
 
 local function weightedRandom()
     local total = 0
@@ -45,67 +47,14 @@ local function rollAwards(count)
 end
 
 local function ensurePlayerData(idx)
-    if not playerBonuses[idx] then
-        playerBonuses[idx] = { damage = 0, tears = 0, shotSpeed = 0, range = 0, speed = 0, luck = 0, maxHearts = 0 }
+    if not playerAwards[idx] then
+        playerAwards[idx] = {}
     end
-    if not playerBaseStats[idx] then
-        playerBaseStats[idx] = {}
+    if not playerHearts[idx] then
+        playerHearts[idx] = {}
     end
-    if not processedItems[idx] then
-        processedItems[idx] = {}
-    end
-end
-
-local function processItem(player, itemId)
-    local idx = player.ControllerIndex
-    ensurePlayerData(idx)
-
-    if processedItems[idx][itemId] then
-        return
-    end
-
-    local rollCount = ROLL_COUNTS[itemId]
-    if not rollCount then return end
-
-    local awards = rollAwards(rollCount)
-    processedItems[idx][itemId] = true
-
-    if awards.maxHearts > 0 then
-        player:AddMaxHearts(math.floor(awards.maxHearts * 2))
-    end
-
-    playerBonuses[idx].damage = playerBonuses[idx].damage + awards.damage
-    playerBonuses[idx].tears = playerBonuses[idx].tears + awards.tears
-    playerBonuses[idx].shotSpeed = playerBonuses[idx].shotSpeed + awards.shotSpeed
-    playerBonuses[idx].range = playerBonuses[idx].range + awards.range
-    playerBonuses[idx].speed = playerBonuses[idx].speed + awards.speed
-    playerBonuses[idx].luck = playerBonuses[idx].luck + awards.luck
-
-    player:AddCacheFlags(CacheFlag.CACHE_ALL)
-    player:EvaluateItems()
-end
-
-function mod:onStatsCache(player, flag)
-    local idx = player.ControllerIndex
-    ensurePlayerData(idx)
-
-    if flag & CacheFlag.CACHE_DAMAGE ~= 0 then
-        playerBaseStats[idx].damage = player.Damage
-    end
-    if flag & CacheFlag.CACHE_FIREDELAY ~= 0 then
-        playerBaseStats[idx].maxFireDelay = player.MaxFireDelay
-    end
-    if flag & CacheFlag.CACHE_SHOTSPEED ~= 0 then
-        playerBaseStats[idx].shotSpeed = player.ShotSpeed
-    end
-    if flag & CacheFlag.CACHE_RANGE ~= 0 then
-        playerBaseStats[idx].tearRange = player.TearRange
-    end
-    if flag & CacheFlag.CACHE_SPEED ~= 0 then
-        playerBaseStats[idx].moveSpeed = player.MoveSpeed
-    end
-    if flag & CacheFlag.CACHE_LUCK ~= 0 then
-        playerBaseStats[idx].luck = player.Luck
+    if not playerCounts[idx] then
+        playerCounts[idx] = {}
     end
 end
 
@@ -113,60 +62,67 @@ function mod:onStatsUpdate(player)
     local idx = player.ControllerIndex
     ensurePlayerData(idx)
 
-    local hasStats = player:HasCollectible(mod.ITEMS.STATS)
-        or player:HasCollectible(mod.ITEMS.STATSONSTATS)
-        or player:HasCollectible(mod.ITEMS.STATSONSTATSONSTATS)
+    for _, itemId in ipairs(STATS_ITEMS) do
+        local count = player:GetCollectibleNum(itemId)
+        local lastCount = playerCounts[idx][itemId] or 0
 
-    if hasStats then
-        if player:HasCollectible(mod.ITEMS.STATS) then
-            processItem(player, mod.ITEMS.STATS)
+        if count ~= lastCount then
+            local totalRolls = count * ROLLS_PER_ITEM[itemId]
+            playerAwards[idx][itemId] = rollAwards(totalRolls)
+            playerCounts[idx][itemId] = count
+
+            local newHearts = math.floor((playerAwards[idx][itemId].maxHearts or 0) * 2)
+            local oldHearts = playerHearts[idx][itemId] or 0
+            local delta = newHearts - oldHearts
+            if delta > 0 then
+                player:AddMaxHearts(delta)
+            end
+            playerHearts[idx][itemId] = newHearts
+
+            player:AddCacheFlags(CacheFlag.CACHE_ALL)
+            player:EvaluateItems()
         end
-        if player:HasCollectible(mod.ITEMS.STATSONSTATS) then
-            processItem(player, mod.ITEMS.STATSONSTATS)
-        end
-        if player:HasCollectible(mod.ITEMS.STATSONSTATSONSTATS) then
-            processItem(player, mod.ITEMS.STATSONSTATSONSTATS)
-        end
-    end
-
-    local bonuses = playerBonuses[idx]
-    local hasBonus = false
-    for _, v in pairs(bonuses) do
-        if v ~= 0 then
-            hasBonus = true
-            break
-        end
-    end
-    if not hasBonus then return end
-
-    local base = playerBaseStats[idx]
-
-    if bonuses.damage ~= 0 and base.damage then
-        player.Damage = base.damage + bonuses.damage
-    end
-
-    if bonuses.tears ~= 0 and base.maxFireDelay then
-        local baseTears = 30 / (base.maxFireDelay + 1)
-        local newTears = baseTears + bonuses.tears
-        player.MaxFireDelay = math.max(0, 30 / newTears - 1)
-    end
-
-    if bonuses.shotSpeed ~= 0 and base.shotSpeed then
-        player.ShotSpeed = base.shotSpeed + bonuses.shotSpeed
-    end
-
-    if bonuses.range ~= 0 and base.tearRange then
-        player.TearRange = base.tearRange + bonuses.range
-    end
-
-    if bonuses.speed ~= 0 and base.moveSpeed then
-        player.MoveSpeed = base.moveSpeed + bonuses.speed
-    end
-
-    if bonuses.luck ~= 0 and base.luck then
-        player.Luck = base.luck + bonuses.luck
     end
 end
 
-mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.onStatsCache)
+function mod:onStatsCache(player, flag)
+    local idx = player.ControllerIndex
+    ensurePlayerData(idx)
+
+    local total = { damage = 0, tears = 0, shotSpeed = 0, range = 0, speed = 0, luck = 0 }
+    for _, itemId in ipairs(STATS_ITEMS) do
+        local awards = playerAwards[idx][itemId]
+        if awards then
+            total.damage = total.damage + (awards.damage or 0)
+            total.tears = total.tears + (awards.tears or 0)
+            total.shotSpeed = total.shotSpeed + (awards.shotSpeed or 0)
+            total.range = total.range + (awards.range or 0)
+            total.speed = total.speed + (awards.speed or 0)
+            total.luck = total.luck + (awards.luck or 0)
+        end
+    end
+
+    if flag & CacheFlag.CACHE_DAMAGE ~= 0 then
+        player.Damage = player.Damage + total.damage
+    end
+    if flag & CacheFlag.CACHE_FIREDELAY ~= 0 then
+        local baseTears = 30 / (player.MaxFireDelay + 1)
+        local newTears = baseTears + total.tears
+        player.MaxFireDelay = math.max(0, 30 / newTears - 1)
+    end
+    if flag & CacheFlag.CACHE_SHOTSPEED ~= 0 then
+        player.ShotSpeed = player.ShotSpeed + total.shotSpeed
+    end
+    if flag & CacheFlag.CACHE_RANGE ~= 0 then
+        player.TearRange = player.TearRange + total.range
+    end
+    if flag & CacheFlag.CACHE_SPEED ~= 0 then
+        player.MoveSpeed = player.MoveSpeed + total.speed
+    end
+    if flag & CacheFlag.CACHE_LUCK ~= 0 then
+        player.Luck = player.Luck + total.luck
+    end
+end
+
 mod:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, mod.onStatsUpdate)
+mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.onStatsCache)
