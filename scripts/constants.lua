@@ -5,7 +5,6 @@ mod.HEXTECH_CONFIG = {
     PEDESTAL_SPACING = 80,
     PEDESTAL_Y_OFFSET = -60,
     MAX_STAGE = 4,
-    ITEM_POOL = ItemPoolType.POOL_DEVIL,
 }
 
 mod.ITEMS = {}
@@ -21,3 +20,4 @@ mod.ITEMS.TRANSMUTEPRISMATIC = Isaac.GetItemIdByName("Hextech Transmute Prismati
 mod.ITEMS.TRANSMUTECHAOS = Isaac.GetItemIdByName("Hextech Transmute Chaos")
 mod.ITEMS.CELESTIALBODY = Isaac.GetItemIdByName("Hextech Celestial Body")
 mod.ITEMS.JEWELEDGAUNTLET = Isaac.GetItemIdByName("Hextech Jeweled Gauntlet")
+mod.ITEMS.APEXINVENTOR = Isaac.GetItemIdByName("Hextech Apex Inventor")

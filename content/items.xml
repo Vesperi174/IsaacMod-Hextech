@@ -95,4 +95,12 @@
     quality="4"
     tags="offensive"
   />
+  <passive
+    name="Hextech Apex Inventor"
+    cache=""
+    description="尖端发明家！"
+    gfx="apexinventor.png"
+    quality="3"
+    tags="offensive"
+  />
 </items>

@@ -161,7 +161,7 @@ if EID then
     EID:addCollectible(
         mod.ITEMS.TRANSMUTECHAOS,
         "#随机获得两个海克斯道具，品质随机",
-        "质变：混沌阶",
+        "质变：混沌",
         "zh_cn"
     )
 
@@ -201,6 +201,22 @@ if EID then
         "#Grants a damage multiplier that changes every second, range 1.50~2.25"
         .. "#+0.5 to multiplier range per extra copy",
         "Hextech Jeweled Gauntlet",
+        "en_us"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.APEXINVENTOR,
+        "#主动道具获得充能时额外获得1格充能"
+        .. "#此法获得的能量可以溢出",
+        "尖端发明家",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.APEXINVENTOR,
+        "#Active item gains 1 extra charge whenever it gains charge"
+        .. "#This bonus charge can exceed the charge limit",
+        "Hextech Apex Inventor",
         "en_us"
     )
 end
