@@ -23,6 +23,7 @@ local SCRIPTS = {
     "items.celestialbody",
     "items.jeweledgauntlet",
     "items.apexinventor",
+    "items.backtobasics",
     "eid_integration",
 }
 

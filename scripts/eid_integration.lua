@@ -219,4 +219,20 @@ if EID then
         "Hextech Apex Inventor",
         "en_us"
     )
+
+    EID:addCollectible(
+        mod.ITEMS.BACKTOBASICS,
+        "#禁用主动道具、饰品、药丸和卡牌"
+        .. "#攻击力 ×3",
+        "回归基本功",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.BACKTOBASICS,
+        "#Disables active items, trinkets, pills, and cards"
+        .. "#Damage ×3",
+        "Hextech Back to Basics",
+        "en_us"
+    )
 end

@@ -103,4 +103,12 @@
     quality="3"
     tags="offensive"
   />
+  <passive
+    name="Hextech Back to Basics"
+    cache=""
+    description="回归基本功！"
+    gfx="backtobasics.png"
+    quality="4"
+    tags="offensive"
+  />
 </items>
