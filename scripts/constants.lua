@@ -10,3 +10,7 @@ mod.HEXTECH_CONFIG = {
 
 mod.ITEMS = {}
 mod.ITEMS.TAPDANCER = Isaac.GetItemIdByName("Hextech Tapdancer")
+mod.ITEMS.BLUNTFORCE = Isaac.GetItemIdByName("Hextech Blunt Force")
+mod.ITEMS.STATS = Isaac.GetItemIdByName("Hextech Stats")
+mod.ITEMS.STATSONSTATS = Isaac.GetItemIdByName("Hextech StatsonStats")
+mod.ITEMS.STATSONSTATSONSTATS = Isaac.GetItemIdByName("Hextech StatsonStatsonStats")

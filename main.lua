@@ -12,6 +12,8 @@ local SCRIPTS = {
     "pedestal_spawner",
     "callbacks",
     "items.tapdancer",
+    "items.bluntforce",
+    "items.stats",
     "eid_integration",
 }
 

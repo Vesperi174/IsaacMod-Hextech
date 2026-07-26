@@ -1,11 +1,42 @@
 <items gfxroot="gfx/items/" version="1">
   <passive
-    id="1"
     name="Hextech Tapdancer"
     cache="speed firedelay"
-    description="踢踏舞！"
+    description="Tap dance!"
     gfx="tapdancer.png"
     quality="3"
+    tags="offensive"
+  />
+  <passive
+    name="Hextech Blunt Force"
+    cache="damage"
+    description="Great strength!"
+    gfx="bluntforce.png"
+    quality="2"
+    tags="offensive"
+  />
+  <passive
+    name="Hextech Stats"
+    cache="all"
+    description="Random stat boosts"
+    gfx="stats.png"
+    quality="2"
+    tags="offensive"
+  />
+  <passive
+    name="Hextech StatsonStats"
+    cache="all"
+    description="Even more random stat boosts"
+    gfx="statsonstats.png"
+    quality="3"
+    tags="offensive"
+  />
+  <passive
+    name="Hextech StatsonStatsonStats"
+    cache="all"
+    description="All the random stat boosts"
+    gfx="statsonstatsonstats.png"
+    quality="4"
     tags="offensive"
   />
 </items>
