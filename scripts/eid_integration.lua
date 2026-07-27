@@ -294,16 +294,14 @@ if EID then
 
     EID:addCollectible(
         mod.ITEMS.MYSTICPUNCH,
-        "#命中敌人时有15%概率为主动道具充能1格"
-        .. "#多拿可多次独立判定，最多叠加充能格数",
+        "#命中敌人时有15%概率为主动道具充能1格",
         "秘术冲拳",
         "zh_cn"
     )
 
     EID:addCollectible(
         mod.ITEMS.MYSTICPUNCH,
-        "#15% chance on hit to add 1 charge to your active item"
-        .. "#Multiple copies roll independently, can stack charges",
+        "#15% chance on hit to add 1 charge to your active item",
         "Hextech Mystic Punch",
         "en_us"
     )
