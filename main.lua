@@ -27,6 +27,7 @@ local SCRIPTS = {
     "items.transmutechaos",
     "items.celestialbody",
     "items.jeweledgauntlet",
+    "items.mysticpunch",
     "items.apexinventor",
     "items.backtobasics",
     "items.fanthehammer",

@@ -24,6 +24,7 @@ mod.ITEMS.TRANSMUTEPRISMATIC = Isaac.GetItemIdByName("Hextech Transmute Prismati
 mod.ITEMS.TRANSMUTECHAOS = Isaac.GetItemIdByName("Hextech Transmute Chaos")
 mod.ITEMS.CELESTIALBODY = Isaac.GetItemIdByName("Hextech Celestial Body")
 mod.ITEMS.JEWELEDGAUNTLET = Isaac.GetItemIdByName("Hextech Jeweled Gauntlet")
+mod.ITEMS.MYSTICPUNCH = Isaac.GetItemIdByName("Hextech Mystic Punch")
 mod.ITEMS.APEXINVENTOR = Isaac.GetItemIdByName("Hextech Apex Inventor")
 mod.ITEMS.BACKTOBASICS = Isaac.GetItemIdByName("Hextech Back to Basics")
 mod.ITEMS.FANTHEHAMMER = Isaac.GetItemIdByName("Hextech Fan the Hammer")
