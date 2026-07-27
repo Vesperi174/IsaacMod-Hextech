@@ -29,6 +29,7 @@ local SCRIPTS = {
     "items.jeweledgauntlet",
     "items.apexinventor",
     "items.backtobasics",
+    "items.fanthehammer",
     "eid_integration",
 }
 

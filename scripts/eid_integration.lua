@@ -243,6 +243,24 @@ if EID then
     )
 
     EID:addCollectible(
+        mod.ITEMS.FANTHEHAMMER,
+        "#四个方向各有独立6秒冷却"
+        .. "#命中时若该方向冷却就绪，发射4枚{{Damage}} 0.5×攻击力伤害的飞弹"
+        .. "#多个连拨击锤无额外效果",
+        "连拨击锤",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.FANTHEHAMMER,
+        "#Each of 4 directions has a separate 6s cooldown"
+        .. "#On hit, if that direction is ready, fires 4 missiles dealing {{Damage}} 0.5× damage each"
+        .. "#No additional effect from multiple copies",
+        "Hextech Fan the Hammer",
+        "en_us"
+    )
+
+    EID:addCollectible(
         mod.ITEMS.JEWELEDGAUNTLET,
         "#获得每秒变化的伤害倍率，范围为1.50~2.25"
         .. "#每多一个提升0.5倍率上限",

@@ -116,7 +116,15 @@
     cache=""
     description="回归基本功！"
     gfx="backtobasics.png"
-    quality="4"
+    quality="3"
+    tags="offensive"
+  />
+  <passive
+    name="Hextech Fan the Hammer"
+    cache=""
+    description="连拨击锤！"
+    gfx="fanthehammer.png"
+    quality="3"
     tags="offensive"
   />
   <passive

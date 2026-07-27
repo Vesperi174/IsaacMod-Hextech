@@ -94,6 +94,7 @@ mod.HextechPool:Register(mod.ITEMS.SLOWANDSTEADY, mod.HextechPool.GOLD, 2)
 mod.HextechPool:Register(mod.ITEMS.ITSKILLINGTIME, mod.HextechPool.GOLD, 2)
 mod.HextechPool:Register(mod.ITEMS.APEXINVENTOR, mod.HextechPool.GOLD, 3)
 mod.HextechPool:Register(mod.ITEMS.BACKTOBASICS, mod.HextechPool.PRISMATIC, 4)
+mod.HextechPool:Register(mod.ITEMS.FANTHEHAMMER, mod.HextechPool.PRISMATIC, 3)
 
 Isaac.ConsoleOutput("[hextech] Prismatic: " .. #mod.HextechPool.items[mod.HextechPool.PRISMATIC] .. "\n")
 Isaac.ConsoleOutput("[hextech] Gold: " .. #mod.HextechPool.items[mod.HextechPool.GOLD] .. "\n")
