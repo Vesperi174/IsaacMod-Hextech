@@ -1,19 +1,27 @@
 local mod = HextechMod
 
 local INVINCIBLE_DURATION = 150
+local INTERNAL_CD = 300
 
 local invincibleTimer = 0
+local internalCd = 0
 
 function mod:onCantTouchThisUse()
     local player = Isaac.GetPlayer(0)
     if not player or not player:HasCollectible(mod.ITEMS.CANTTOUCHTHIS) then return end
+    if internalCd > 0 then return end
 
     invincibleTimer = INVINCIBLE_DURATION
+    internalCd = INTERNAL_CD
 end
 
 function mod:onCantTouchThisUpdate()
-    if invincibleTimer <= 0 then return end
-    invincibleTimer = invincibleTimer - 1
+    if invincibleTimer > 0 then
+        invincibleTimer = invincibleTimer - 1
+    end
+    if internalCd > 0 then
+        internalCd = internalCd - 1
+    end
 end
 
 function mod:onCantTouchThisRender()
@@ -39,6 +47,7 @@ end
 
 function mod:onCantTouchThisNewRoom()
     invincibleTimer = 0
+    internalCd = 0
 end
 
 mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.onCantTouchThisUse)
