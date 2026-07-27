@@ -153,6 +153,22 @@ if EID then
         "en_us"
     )
 
+    EID:addCollectible(
+        mod.ITEMS.NIGHTHUNT,
+        "#击杀敌人后，房间内所有敌人混乱2秒"
+        .. "#多个夜狩无额外效果",
+        "夜狩",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.NIGHTHUNT,
+        "#On kill, confuses all enemies in the room for 2 seconds"
+        .. "#No additional effect from multiple copies",
+        "Hextech Night Hunt",
+        "en_us"
+    )
+
     -- L3
     EID:addCollectible(
         mod.ITEMS.APEXINVENTOR,

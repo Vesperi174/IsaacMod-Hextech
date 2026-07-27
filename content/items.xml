@@ -68,6 +68,14 @@
     tags="offensive"
   />
   <passive
+    name="Hextech Night Hunt"
+    cache=""
+    description="夜狩！"
+    gfx="nighthunt.png"
+    quality="2"
+    tags="offensive"
+  />
+  <passive
     name="Hextech Slow and Steady"
     cache="firedelay"
     description="一板一眼！"

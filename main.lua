@@ -18,6 +18,7 @@ local SCRIPTS = {
     "items.stats",
     "items.slowandsteady",
     "items.itskillingtime",
+    "items.nighthunt",
     "items.deft",
     "items.dematerialize",
     "items.silverspoon",
