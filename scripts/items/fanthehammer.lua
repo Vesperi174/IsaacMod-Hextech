@@ -1,8 +1,9 @@
 local mod = HextechMod
+local game = mod.Game
 
 local MISSILE_COUNT = 4
 local MISSILE_DELAY = 3
-local COOLDOWN_FRAMES = 6 * 30
+local COOLDOWN_FRAMES = 10 * 30
 local NUM_DIRECTIONS = 4
 
 function mod:onFthDamage(target, amount, flag, source, cooldown)
@@ -31,9 +32,9 @@ function mod:onFthDamage(target, amount, flag, source, cooldown)
         pdata.fthCooldowns = { 0, 0, 0, 0 }
     end
 
-    local dir = player.HeadDirection
-    if not dir then
-        local vel = player.Velocity
+    local dir
+    local vel = srcEntity.Velocity
+    if vel then
         local absX = math.abs(vel.X)
         local absY = math.abs(vel.Y)
         if absX > absY then
@@ -41,6 +42,9 @@ function mod:onFthDamage(target, amount, flag, source, cooldown)
         else
             if vel.Y > 0 then dir = 2 else dir = 0 end
         end
+    end
+    if not dir then
+        dir = 2
     end
 
     if pdata.fthCooldowns[dir + 1] and pdata.fthCooldowns[dir + 1] > 0 then
@@ -95,3 +99,56 @@ end
 
 mod:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, mod.onFthDamage)
 mod:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, mod.onFthUpdate)
+
+local DIR_ARROWS = { "^", ">", "v", "<" }
+
+local debugDone = false
+
+function mod:onFthRender()
+    local sw = Isaac.GetScreenWidth()
+    local sh = Isaac.GetScreenHeight()
+    if not sw then sw = 480 end
+    if not sh then sh = 270 end
+
+    if not debugDone then
+        debugDone = true
+        Isaac.ConsoleOutput("[fth] screen=" .. tostring(sw) .. "x" .. tostring(sh) .. "\n")
+    end
+
+    local hasItem = false
+    for i = 0, game:GetNumPlayers() - 1 do
+        local player = Isaac.GetPlayer(i)
+        if player and player:HasCollectible(mod.ITEMS.FANTHEHAMMER) then
+            hasItem = true
+            break
+        end
+    end
+    if not hasItem then return end
+
+    local pdata = Isaac.GetPlayer(0):GetData()
+    local cd = pdata.fthCooldowns
+    if not cd then
+        cd = { 0, 0, 0, 0 }
+    end
+
+    local cx = sw / 2
+    local cy = sh / 2
+    local positions = {
+        { x = cx,      y = 10 },
+        { x = sw - 20, y = cy },
+        { x = cx,      y = sh - 20 },
+        { x = 10,      y = cy },
+    }
+
+    for d = 1, 4 do
+        local r, g, b
+        if cd[d] <= 0 then
+            r, g, b = 0, 255, 0
+        else
+            r, g, b = 255, 0, 0
+        end
+        Isaac.RenderText(DIR_ARROWS[d], positions[d].x - 8, positions[d].y - 8, r, g, b, 255)
+    end
+end
+
+mod:AddCallback(ModCallbacks.MC_POST_RENDER, mod.onFthRender)
