@@ -12,8 +12,20 @@ function mod:onBackToBasicsUpdate(player)
     if not player:HasCollectible(mod.ITEMS.BACKTOBASICS) then return end
 
     local pos = player.Position
+    local pType = player:GetPlayerType()
 
-    -- Drop active items (primary, secondary, pocket)
+    if pType == 18 then
+        local activeSlots = { 0, 1, 2 }
+        for _, slot in ipairs(activeSlots) do
+            local itemId = player:GetActiveItem(slot)
+            if itemId > 0 then
+                player:SetActiveCharge(0, slot)
+            end
+        end
+        player:SetSoulCharge(0)
+        return
+    end
+
     local activeSlots = { 0, 1, 2 }
     for _, slot in ipairs(activeSlots) do
         local itemId = player:GetActiveItem(slot)
@@ -53,6 +65,16 @@ function mod:onBackToBasicsUpdate(player)
 end
 
 mod:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, mod.onBackToBasicsUpdate)
+
+function mod:onBackToBasicsUse(collectibleType, rng, player, useFlags, activeSlot)
+    local pType = player:GetPlayerType()
+    if pType ~= 18 and pType ~= 36 then return end
+    if not player:HasCollectible(mod.ITEMS.BACKTOBASICS) then return end
+
+    return false
+end
+
+mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.onBackToBasicsUse)
 
 mod.DamagePipeline:Register({
     type = mod.DamagePipeline.MULTIPLY,
