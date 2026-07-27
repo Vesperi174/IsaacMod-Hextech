@@ -102,18 +102,11 @@ mod:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, mod.onFthUpdate)
 
 local DIR_ARROWS = { "^", ">", "v", "<" }
 
-local debugDone = false
-
 function mod:onFthRender()
     local sw = Isaac.GetScreenWidth()
     local sh = Isaac.GetScreenHeight()
     if not sw then sw = 480 end
     if not sh then sh = 270 end
-
-    if not debugDone then
-        debugDone = true
-        Isaac.ConsoleOutput("[fth] screen=" .. tostring(sw) .. "x" .. tostring(sh) .. "\n")
-    end
 
     local hasItem = false
     for i = 0, game:GetNumPlayers() - 1 do
