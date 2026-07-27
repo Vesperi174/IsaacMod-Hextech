@@ -7,8 +7,8 @@ local ENTITY_TEAR = 2
 local TEAR_SPECTRAL = TearFlags and TearFlags.TEAR_SPECTRAL or 1
 local TEAR_HOMING = TearFlags and TearFlags.TEAR_HOMING or 4
 local FLAG_APPLY_GRAVITY = EntityFlag and EntityFlag.FLAG_APPLY_GRAVITY or (1 << 14)
-local MISSILE_SPEED_INIT = 3
-local MISSILE_SPEED_MAX = 15
+local MISSILE_SPEED_INIT = 10
+local MISSILE_SPEED_MAX = 30
 local MISSILE_ACCEL = 1.04
 local MISSILE_HEIGHT = -20
 
@@ -16,7 +16,8 @@ local sideCounter = 0
 
 function Missile.Fire(player, target, damage)
     local pos = player.Position
-    local dir = (target.Position - pos):Normalized()
+    local targetPos = target.Position or target
+    local dir = (targetPos - pos):Normalized()
 
     local sideDir
     if sideCounter % 2 == 0 then
@@ -39,7 +40,9 @@ function Missile.Fire(player, target, damage)
     end
 
     t.CollisionDamage = damage
-    t.Target = target
+    if target.Position then
+        t.Target = target
+    end
 
     t.Height = MISSILE_HEIGHT
     t.FallingSpeed = 0
