@@ -86,6 +86,22 @@ if EID then
     )
 
     EID:addCollectible(
+        mod.ITEMS.TYPHOON,
+        "#命中敌人时向该目标发射{{Damage}} 1.00伤害的追踪飞弹"
+        .. "#多拿增加飞弹数量",
+        "台风",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.TYPHOON,
+        "#On hit, fires a homing missile at the target dealing {{Damage}} 1.00 damage"
+        .. "#Multiple copies increase missile count",
+        "Hextech Typhoon",
+        "en_us"
+    )
+
+    EID:addCollectible(
         mod.ITEMS.TRANSMUTEGOLD,
         "#随机获得一个黄金阶海克斯道具",
         "质变：黄金阶",
