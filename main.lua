@@ -32,6 +32,7 @@ local SCRIPTS = {
     "items.apexinventor",
     "items.backtobasics",
     "items.fanthehammer",
+    "items.canttouchthis",
     "eid_integration",
 }
 

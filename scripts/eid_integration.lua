@@ -155,7 +155,7 @@ if EID then
 
     EID:addCollectible(
         mod.ITEMS.NIGHTHUNT,
-        "#击杀敌人后，房间内所有敌人混乱2秒"
+        "#击杀敌人后，房间内所有敌人混乱1.5秒"
         .. "#多个夜狩无额外效果",
         "夜狩",
         "zh_cn"
@@ -163,7 +163,7 @@ if EID then
 
     EID:addCollectible(
         mod.ITEMS.NIGHTHUNT,
-        "#On kill, confuses all enemies in the room for 2 seconds"
+        "#On kill, confuses all enemies in the room for 1.5 seconds"
         .. "#No additional effect from multiple copies",
         "Hextech Night Hunt",
         "en_us"
@@ -260,7 +260,7 @@ if EID then
 
     EID:addCollectible(
         mod.ITEMS.FANTHEHAMMER,
-        "#四个方向各有独立10秒冷却"
+        "#四个方向各有独立6秒冷却"
         .. "#命中时若该方向冷却就绪，发射4枚{{Damage}} 0.5×攻击力伤害的飞弹"
         .. "#多个连拨击锤无额外效果",
         "连拨击锤",
@@ -269,10 +269,26 @@ if EID then
 
     EID:addCollectible(
         mod.ITEMS.FANTHEHAMMER,
-        "#Each of 4 directions has a separate 10s cooldown"
+        "#Each of 4 directions has a separate 6s cooldown"
         .. "#On hit, if that direction is ready, fires 4 missiles dealing {{Damage}} 0.5× damage each"
         .. "#No additional effect from multiple copies",
         "Hextech Fan the Hammer",
+        "en_us"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.CANTTOUCHTHIS,
+        "#使用主动道具后获得5秒无敌"
+        .. "#多个你摸不到无额外效果",
+        "你摸不到",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.CANTTOUCHTHIS,
+        "#After using an active item, gain 5 seconds of invincibility"
+        .. "#No additional effect from multiple copies",
+        "Hextech Can't Touch This",
         "en_us"
     )
 

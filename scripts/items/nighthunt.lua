@@ -1,6 +1,6 @@
 local mod = HextechMod
 
-local CONFUSION_DURATION = 60
+local CONFUSION_DURATION = 45
 local FLAG_CONFUSION = EntityFlag and EntityFlag.FLAG_CONFUSION or (1 << 5)
 
 local confusionTimer = 0
@@ -46,5 +46,5 @@ function mod:onNightHuntNewRoom()
 end
 
 mod:AddCallback(ModCallbacks.MC_POST_ENTITY_KILL, mod.onNightHuntKill)
-mod:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, mod.onNightHuntUpdate)
+mod:AddCallback(ModCallbacks.MC_POST_UPDATE, mod.onNightHuntUpdate)
 mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, mod.onNightHuntNewRoom)

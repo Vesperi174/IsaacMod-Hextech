@@ -136,6 +136,14 @@
     tags="offensive"
   />
   <passive
+    name="Hextech Can't Touch This"
+    cache=""
+    description="你摸不到！"
+    gfx="canttouchthis.png"
+    quality="2"
+    tags="offensive"
+  />
+  <passive
     name="Hextech Jeweled Gauntlet"
     cache="damage"
     description="珠光护手！"

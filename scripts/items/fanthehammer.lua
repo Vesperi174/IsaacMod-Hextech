@@ -3,7 +3,7 @@ local game = mod.Game
 
 local MISSILE_COUNT = 4
 local MISSILE_DELAY = 3
-local COOLDOWN_FRAMES = 10 * 30
+local COOLDOWN_FRAMES = 6 * 30
 local NUM_DIRECTIONS = 4
 
 function mod:onFthDamage(target, amount, flag, source, cooldown)
@@ -63,7 +63,10 @@ function mod:onFthDamage(target, amount, flag, source, cooldown)
     }
 end
 
-function mod:onFthUpdate(player)
+function mod:onFthUpdate()
+    local player = Isaac.GetPlayer(0)
+    if not player then return end
+
     local pdata = player:GetData()
 
     if pdata.fthCooldowns then
@@ -98,7 +101,7 @@ function mod:onFthUpdate(player)
 end
 
 mod:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, mod.onFthDamage)
-mod:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, mod.onFthUpdate)
+mod:AddCallback(ModCallbacks.MC_POST_UPDATE, mod.onFthUpdate)
 
 local DIR_ARROWS = { "^", ">", "v", "<" }
 
