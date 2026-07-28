@@ -1,6 +1,7 @@
 local mod = HextechMod
 
 local tracked = {}
+local augment404Used = false
 
 local HEX_ITEMS = {
     mod.ITEMS.TAPDANCER, mod.ITEMS.BLUNTFORCE, mod.ITEMS.DEFT,
@@ -35,9 +36,17 @@ function mod:onAugment404Check()
         local current = player:GetCollectibleNum(id, false)
         local previous = tracked[id] or 0
         if current > previous then
-            if math.random(100) == 1 then
+            if player:HasCollectible(mod.ITEMS.AUGMENT404) then
+                if not player:HasCollectible(mod.ITEMS.AUGMENT405) then
+                    player:RemoveCollectible(id)
+                    player:RemoveCollectible(mod.ITEMS.AUGMENT404)
+                    player:AddCollectible(mod.ITEMS.AUGMENT405, 0, false)
+                    augment404Used = true
+                end
+            elseif not augment404Used and math.random(100) == 1 then
                 player:RemoveCollectible(id)
                 player:AddCollectible(mod.ITEMS.AUGMENT404, 0, false)
+                augment404Used = true
             end
         end
         tracked[id] = current

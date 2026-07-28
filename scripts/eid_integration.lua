@@ -229,6 +229,24 @@ if EID then
         "en_us"
     )
 
+    EID:addCollectible(
+        mod.ITEMS.AUGMENT405,
+        "#{{Damage}} ×10"
+        .. "#不会被海克斯池抽取"
+        .. "#拥有404时，下一次获得海克斯必定变成此道具",
+        "强化符文405",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.AUGMENT405,
+        "#{{Damage}} ×10"
+        .. "#Not drawn from the hextech pool"
+        .. "#If you have 404, the next hextech becomes this item",
+        "Hextech Augment 405",
+        "en_us"
+    )
+
     -- L3
     EID:addCollectible(
         mod.ITEMS.APEXINVENTOR,

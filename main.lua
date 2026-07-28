@@ -39,6 +39,7 @@ local SCRIPTS = {
     "items.magicmissile",
     "items.doubletap",
     "items.augment404",
+    "items.augment405",
     "sets.set_system",
     "eid_integration",
 }

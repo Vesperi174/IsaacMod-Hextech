@@ -219,6 +219,14 @@
     tags="offensive"
   />
   <passive
+    name="Hextech Augment 405"
+    cache=""
+    description="强化符文405"
+    gfx="augment405.png"
+    quality="4"
+    tags="offensive"
+  />
+  <passive
     name="Hextech Transmute Chaos"
     cache="all"
     description="质变：混沌阶！"
