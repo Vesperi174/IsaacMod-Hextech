@@ -92,7 +92,7 @@ function mod:onKillingTimeUpdate()
                         for _, entity in ipairs(entities) do
                             local npc = entity:ToNPC()
                             if npc and npc:IsVulnerableEnemy() then
-                                npc:TakeDamage(totalDmg, 0, EntityRef(player), 0)
+                                npc:TakeDamage(totalDmg * 0.4, 0, EntityRef(player), 0)
                             end
                         end
                         playerData[idx] = nil
