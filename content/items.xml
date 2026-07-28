@@ -49,6 +49,14 @@
     tags="offensive"
   />
   <passive
+    name="Hextech Homeguard"
+    cache="speed"
+    description="家园卫士！"
+    gfx="homeguard.png"
+    quality="1"
+    tags="offensive"
+  />
+  <passive
     name="Hextech Transmute Gold"
     cache="all"
     description="质变：黄金阶！"

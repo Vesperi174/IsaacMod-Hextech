@@ -102,6 +102,22 @@ if EID then
     )
 
     EID:addCollectible(
+        mod.ITEMS.HOMEGUARD,
+        "#5秒内不受伤则将移速翻倍"
+        .. "#多次获取无额外效果",
+        "家园卫士",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.HOMEGUARD,
+        "#Doubles movement speed after 5 seconds without taking damage"
+        .. "#No additional effect from multiple copies",
+        "Hextech Homeguard",
+        "en_us"
+    )
+
+    EID:addCollectible(
         mod.ITEMS.TRANSMUTEGOLD,
         "#随机获得一个黄金阶海克斯道具",
         "质变：黄金阶",

@@ -97,6 +97,7 @@ mod.HextechPool:Register(mod.ITEMS.NIGHTHUNT, mod.HextechPool.GOLD, 2)
 mod.HextechPool:Register(mod.ITEMS.APEXINVENTOR, mod.HextechPool.GOLD, 3)
 mod.HextechPool:Register(mod.ITEMS.BACKTOBASICS, mod.HextechPool.PRISMATIC, 4)
 mod.HextechPool:Register(mod.ITEMS.CANTTOUCHTHIS, mod.HextechPool.PRISMATIC, 4)
+mod.HextechPool:Register(mod.ITEMS.HOMEGUARD, mod.HextechPool.SILVER, 1)
 mod.HextechPool:Register(mod.ITEMS.FANTHEHAMMER, mod.HextechPool.PRISMATIC, 3)
 
 Isaac.ConsoleOutput("[hextech] Prismatic: " .. #mod.HextechPool.items[mod.HextechPool.PRISMATIC] .. "\n")

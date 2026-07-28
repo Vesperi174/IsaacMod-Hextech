@@ -33,6 +33,7 @@ local SCRIPTS = {
     "items.backtobasics",
     "items.fanthehammer",
     "items.canttouchthis",
+    "items.homeguard",
     "eid_integration",
 }
 
