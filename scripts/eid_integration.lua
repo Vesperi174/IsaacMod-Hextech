@@ -425,4 +425,56 @@ if EID then
         "Hextech Transmute Chaos",
         "en_us"
     )
+
+    -- ===== 套装进度显示 =====
+    local DRAGON_FLAME_SET = {
+        mod.ITEMS.MAGICMISSILE,
+        mod.ITEMS.FANTHEHAMMER,
+        mod.ITEMS.TYPHOON,
+    }
+    local DRAGON_FLAME_NAMES = {
+        zh_cn = "神龙赤焰",
+        en_us = "Dragon Flame",
+    }
+
+    local function getSetProgress(setItems)
+        local player = Isaac.GetPlayer(0)
+        if not player then return 0 end
+        local count = 0
+        for _, itemId in ipairs(setItems) do
+            if player:GetCollectibleNum(itemId, true) > 0 then
+                count = count + 1
+            end
+        end
+        return count
+    end
+
+    local function isDragonFlameItem(itemId)
+        for _, setId in ipairs(DRAGON_FLAME_SET) do
+            if setId == itemId then return true end
+        end
+        return false
+    end
+
+    EID:addDescriptionModifier(
+        "hextech_dragonflame_set",
+        function(descObj)
+            return descObj.ObjSubType and isDragonFlameItem(descObj.ObjSubType)
+        end,
+        function(descObj)
+            local collected = getSetProgress(DRAGON_FLAME_SET)
+            local total = #DRAGON_FLAME_SET
+            local lang = EID.Config and EID.Config.Language or "en_us"
+            local setName = DRAGON_FLAME_NAMES[lang] or DRAGON_FLAME_NAMES.en_us
+            local completeText = lang == "zh_cn" and "已集齐！" or "Complete!"
+            if collected < total then
+                descObj.Description = descObj.Description ..
+                    "\n#{{ColorYellow}}" .. setName .. " (" .. collected .. "/" .. total .. "){{CR}}"
+            else
+                descObj.Description = descObj.Description ..
+                    "\n#{{ColorGreen}}" .. setName .. " (" .. completeText .. "){{CR}}"
+            end
+            return descObj
+        end
+    )
 end

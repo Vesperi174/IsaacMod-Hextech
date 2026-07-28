@@ -46,6 +46,7 @@
     description="台风！"
     gfx="typhoon.png"
     quality="1"
+    set="DragonFlame"
     tags="offensive"
   />
   <passive
@@ -149,6 +150,7 @@
     description="连拨击锤！"
     gfx="fanthehammer.png"
     quality="3"
+    set="DragonFlame"
     tags="offensive"
   />
   <passive
