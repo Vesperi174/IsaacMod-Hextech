@@ -51,7 +51,6 @@ function mod:onCurseEnergyRender()
         if not CurseEnergy.HasRelatedItem(player) then goto continue end
 
         local stacks = CurseEnergy.GetStacks(player)
-        if stacks <= 0 then goto continue end
 
         local sw = Isaac.GetScreenWidth() or 480
         local yOffset = 10 + i * 16
@@ -63,9 +62,3 @@ function mod:onCurseEnergyRender()
 end
 
 mod:AddCallback(ModCallbacks.MC_POST_RENDER, mod.onCurseEnergyRender)
-
-function mod:onCurseEnergyNewRoom()
-    CurseEnergy.ResetAll()
-end
-
-mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, mod.onCurseEnergyNewRoom)
