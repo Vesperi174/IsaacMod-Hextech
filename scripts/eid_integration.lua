@@ -325,6 +325,24 @@ if EID then
     )
 
     EID:addCollectible(
+        mod.ITEMS.PLAGUEBEARER,
+        "#进入新房间5秒后，根据房间敌人数量获得诅咒能量"
+        .. "#每50层诅咒能量生成随机心（50层=1颗，100层=2颗...）"
+        .. "#多次获得无额外效果",
+        "恐惧使者",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.PLAGUEBEARER,
+        "#5s after entering a new room, gain Curse Energy equal to enemy count"
+        .. "#Every 50 Curse Energy stacks spawns random hearts (50=1, 100=2...)"
+        .. "#No additional effect from multiple copies",
+        "Hextech Plaguebearer",
+        "en_us"
+    )
+
+    EID:addCollectible(
         mod.ITEMS.MYSTICPUNCH,
         "#命中敌人时有15%概率为主动道具充能1格",
         "秘术冲拳",
