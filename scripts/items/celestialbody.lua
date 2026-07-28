@@ -11,14 +11,17 @@ function mod:onCelestialBodyUpdate(player)
     if not player:HasCollectible(mod.ITEMS.CELESTIALBODY) then return end
 
     local idx = player.ControllerIndex
+    local count = player:GetCollectibleNum(mod.ITEMS.CELESTIALBODY)
+
     if not playerData[idx] then
-        playerData[idx] = { applied = false }
+        playerData[idx] = { lastCount = 0 }
     end
 
-    if not playerData[idx].applied then
-        player:AddMaxHearts(HEART_CONTAINERS * 2, false)
-        player:AddHearts(HEAL_AMOUNT * 2)
-        playerData[idx].applied = true
+    if count > playerData[idx].lastCount then
+        local diff = count - playerData[idx].lastCount
+        player:AddMaxHearts(HEART_CONTAINERS * diff * 2, false)
+        player:AddHearts(HEAL_AMOUNT * diff * 2)
+        playerData[idx].lastCount = count
     end
 end
 
@@ -28,6 +31,7 @@ mod.DamagePipeline:Register({
     type = mod.DamagePipeline.MULTIPLY,
     callback = function(player, raw, current)
         if not player:HasCollectible(mod.ITEMS.CELESTIALBODY) then return nil end
-        return DAMAGE_MULTIPLIER
+        local count = player:GetCollectibleNum(mod.ITEMS.CELESTIALBODY)
+        return DAMAGE_MULTIPLIER ^ count
     end,
 })
