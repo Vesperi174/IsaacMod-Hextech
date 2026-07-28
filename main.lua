@@ -34,6 +34,7 @@ local SCRIPTS = {
     "items.fanthehammer",
     "items.canttouchthis",
     "items.homeguard",
+    "items.plaguebearer",
     "eid_integration",
 }
 

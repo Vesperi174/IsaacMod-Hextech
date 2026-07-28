@@ -136,6 +136,14 @@
     tags="offensive"
   />
   <passive
+    name="Hextech Plaguebearer"
+    cache=""
+    description="恐惧使者！"
+    gfx="plaguebearer.png"
+    quality="3"
+    tags="offensive"
+  />
+  <passive
     name="Hextech Fan the Hammer"
     cache=""
     description="连拨击锤！"
