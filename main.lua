@@ -37,6 +37,7 @@ local SCRIPTS = {
     "items.homeguard",
     "items.plaguebearer",
     "items.magicmissile",
+    "items.doubletap",
     "sets.set_system",
     "eid_integration",
 }

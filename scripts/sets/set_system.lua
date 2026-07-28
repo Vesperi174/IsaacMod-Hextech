@@ -7,6 +7,7 @@ mod.SETS = {
             mod.ITEMS.MAGICMISSILE,
             mod.ITEMS.FANTHEHAMMER,
             mod.ITEMS.TYPHOON,
+            mod.ITEMS.DOUBLETAP,
         },
     },
 }
@@ -59,7 +60,7 @@ function mod:FireChainMissile(tear, target)
     local player = tear.SpawnerEntity
     if not player or not target then return end
 
-    mod.Missile.Fire(player, target, 1.0)
+    mod.Missile.Fire(player, target, 1.0, nil)
 end
 
 function mod:onMissileTakeDamage(entity, amount, flags, source, cooldownFrames)

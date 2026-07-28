@@ -201,6 +201,20 @@ if EID then
         "en_us"
     )
 
+    EID:addCollectible(
+        mod.ITEMS.DOUBLETAP,
+        "#暂时不写",
+        "双发快射",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.DOUBLETAP,
+        "#TBD",
+        "Hextech Double Tap",
+        "en_us"
+    )
+
     -- L3
     EID:addCollectible(
         mod.ITEMS.APEXINVENTOR,
@@ -431,6 +445,7 @@ if EID then
         mod.ITEMS.MAGICMISSILE,
         mod.ITEMS.FANTHEHAMMER,
         mod.ITEMS.TYPHOON,
+        mod.ITEMS.DOUBLETAP,
     }
     local DRAGON_FLAME_NAMES = {
         zh_cn = "神龙赤焰",

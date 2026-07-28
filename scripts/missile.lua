@@ -7,14 +7,14 @@ local ENTITY_TEAR = 2
 local TEAR_SPECTRAL = TearFlags and TearFlags.TEAR_SPECTRAL or 1
 local TEAR_HOMING = TearFlags and TearFlags.TEAR_HOMING or 4
 local FLAG_APPLY_GRAVITY = EntityFlag and EntityFlag.FLAG_APPLY_GRAVITY or (1 << 14)
-local MISSILE_SPEED_INIT = 10
-local MISSILE_SPEED_MAX = 30
+local MISSILE_SPEED_INIT = 5
+local MISSILE_SPEED_MAX = 20
 local MISSILE_ACCEL = 1.04
 local MISSILE_HEIGHT = -20
 
 local sideCounter = 0
 
-function Missile.Fire(player, target, damage)
+function Missile.Fire(player, target, damage, sourceItem)
     local pos = player.Position
     local targetPos = target.Position or target
     local dir = (targetPos - pos):Normalized()
@@ -54,6 +54,10 @@ function Missile.Fire(player, target, damage)
     end
 
     tear:GetData().isMissile = true
+    tear:GetData().sourceItem = sourceItem
+    if target.Position then
+        tear:GetData().target = target
+    end
 end
 
 function mod:onMissileUpdate(tear)

@@ -50,7 +50,7 @@ function mod:onMagicMissileUpdate(player)
     local enemyIndex = #queue.enemies - math.floor(queue.remaining / queue.perEnemy)
     local enemy = queue.enemies[enemyIndex]
     if enemy and enemy:Exists() then
-        mod.Missile.Fire(player, enemy, MISSILE_DAMAGE)
+        mod.Missile.Fire(player, enemy, MISSILE_DAMAGE, mod.ITEMS.MAGICMISSILE)
     end
 
     queue.remaining = queue.remaining - 1

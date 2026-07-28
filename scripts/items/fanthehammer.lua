@@ -95,7 +95,7 @@ function mod:onFthUpdate()
         npc = nil
     end
 
-    mod.Missile.Fire(player, npc or queue.targetPos, queue.damage)
+    mod.Missile.Fire(player, npc or queue.targetPos, queue.damage, mod.ITEMS.FANTHEHAMMER)
     queue.remaining = queue.remaining - 1
     queue.timer = MISSILE_DELAY
 end

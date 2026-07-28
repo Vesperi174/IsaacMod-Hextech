@@ -202,6 +202,15 @@
     tags="offensive"
   />
   <passive
+    name="Hextech Double Tap"
+    cache=""
+    description="双发快射！"
+    gfx="doubletap.png"
+    quality="2"
+    set="DragonFlame"
+    tags="offensive"
+  />
+  <passive
     name="Hextech Transmute Chaos"
     cache="all"
     description="质变：混沌阶！"
