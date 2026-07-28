@@ -62,3 +62,7 @@ function mod:onCurseEnergyRender()
 end
 
 mod:AddCallback(ModCallbacks.MC_POST_RENDER, mod.onCurseEnergyRender)
+
+mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, function()
+    CurseEnergy.ResetAll()
+end)

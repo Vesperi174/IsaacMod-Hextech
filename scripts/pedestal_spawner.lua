@@ -3,10 +3,18 @@ local Pool = mod.HextechPool
 
 local ALLOWED_STAGES = { [1] = true, [2] = true, [4] = true, [6] = true }
 local spawnedStages = {}
+local currentRunSeed = nil
 
 function mod:SpawnHextechPedestals()
+    local seeds = mod.Game:GetSeeds()
+    local startSeed = seeds:GetStartSeed()
+
+    if startSeed ~= currentRunSeed then
+        spawnedStages = {}
+        currentRunSeed = startSeed
+    end
+
     local stage = mod.Game:GetLevel():GetAbsoluteStage()
-    Isaac.ConsoleOutput("[hextech] Stage: " .. stage .. "\n")
     if not ALLOWED_STAGES[stage] then
         return
     end
@@ -42,7 +50,3 @@ function mod:SpawnHextechPedestals()
         end
     end
 end
-
-mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, function()
-    spawnedStages = {}
-end)

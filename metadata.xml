@@ -1,8 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-	<name>hextech</name>
-	<directory>hextech</directory>
-	<description/>
-	<version>1.0</version>
-	<visibility/>
+    <name>hextech</name>
+    <directory>hextech</directory>
+    <id>3773290767</id>
+    <description>在1，2，4，6层的初始房间会出现3选1的海克斯
+持续更新中</description>
+    <version>1.1</version>
+    <visibility>Public</visibility>
+    <tag id="Lua"/>
+    <tag id="Items"/>
+    <tag id="Active Items"/>
 </metadata>
-
