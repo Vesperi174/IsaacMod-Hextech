@@ -36,6 +36,7 @@ local SCRIPTS = {
     "items.canttouchthis",
     "items.homeguard",
     "items.plaguebearer",
+    "items.magicmissile",
     "eid_integration",
 }
 

@@ -185,6 +185,22 @@ if EID then
         "en_us"
     )
 
+    EID:addCollectible(
+        mod.ITEMS.MAGICMISSILE,
+        "#使用主动道具后，对每个敌人发射3枚{{Damage}} 1.00飞弹"
+        .. "#多次获得增加飞弹数量",
+        "魔法飞弹",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.MAGICMISSILE,
+        "#On active item use, fires 3 missiles at each enemy for {{Damage}} 1.00"
+        .. "#Multiple copies increase missile count",
+        "Hextech Magic Missile",
+        "en_us"
+    )
+
     -- L3
     EID:addCollectible(
         mod.ITEMS.APEXINVENTOR,

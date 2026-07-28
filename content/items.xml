@@ -192,6 +192,14 @@
     tags="offensive"
   />
   <passive
+    name="Hextech Magic Missile"
+    cache="all"
+    description="魔法飞弹！"
+    gfx="magicmissile.png"
+    quality="2"
+    tags="offensive"
+  />
+  <passive
     name="Hextech Transmute Chaos"
     cache="all"
     description="质变：混沌阶！"

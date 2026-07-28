@@ -94,6 +94,7 @@ mod.HextechPool:Register(mod.ITEMS.STATSONSTATSONSTATS, mod.HextechPool.PRISMATI
 mod.HextechPool:Register(mod.ITEMS.SLOWANDSTEADY, mod.HextechPool.GOLD, 2)
 mod.HextechPool:Register(mod.ITEMS.ITSKILLINGTIME, mod.HextechPool.GOLD, 2)
 mod.HextechPool:Register(mod.ITEMS.NIGHTHUNT, mod.HextechPool.GOLD, 2)
+mod.HextechPool:Register(mod.ITEMS.MAGICMISSILE, mod.HextechPool.GOLD, 2)
 mod.HextechPool:Register(mod.ITEMS.APEXINVENTOR, mod.HextechPool.GOLD, 3)
 mod.HextechPool:Register(mod.ITEMS.BACKTOBASICS, mod.HextechPool.PRISMATIC, 4)
 mod.HextechPool:Register(mod.ITEMS.CANTTOUCHTHIS, mod.HextechPool.PRISMATIC, 4)
