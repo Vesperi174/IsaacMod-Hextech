@@ -77,6 +77,33 @@ function mod:onMissileTakeDamage(entity, amount, flags, source, cooldownFrames)
     end
 end
 
+function mod:GetSetBoost(itemId)
+    local player = Isaac.GetPlayer(0)
+    if not player then return 1.0 end
+
+    for _, setData in pairs(mod.SETS) do
+        for _, setId in ipairs(setData.items) do
+            if setId == itemId then
+                local collected = 0
+                for _, sId in ipairs(setData.items) do
+                    if player:GetCollectibleNum(sId, true) > 0 then
+                        collected = collected + 1
+                    end
+                end
+
+                if collected == 1 then
+                    return 1.5
+                elseif collected == 2 then
+                    return 1.25
+                else
+                    return 1.0
+                end
+            end
+        end
+    end
+    return 1.0
+end
+
 mod:AddCallback(ModCallbacks.MC_POST_UPDATE, function()
     local player = Isaac.GetPlayer(0)
     if player then

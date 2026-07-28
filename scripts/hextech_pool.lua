@@ -48,7 +48,9 @@ function mod.HextechPool:GetRandomItems(tier, count)
     for _ = 1, n do
         local totalWeight = 0
         for i = 1, #pool do
-            totalWeight = totalWeight + self.LEVEL_WEIGHTS[pool[i].level]
+            local baseWeight = self.LEVEL_WEIGHTS[pool[i].level]
+            local boost = mod:GetSetBoost(pool[i].id)
+            totalWeight = totalWeight + baseWeight * boost
         end
 
         if totalWeight <= 0 then
@@ -58,7 +60,9 @@ function mod.HextechPool:GetRandomItems(tier, count)
             local roll = math.random() * totalWeight
             local cumulative = 0
             for i = 1, #pool do
-                cumulative = cumulative + self.LEVEL_WEIGHTS[pool[i].level]
+                local baseWeight = self.LEVEL_WEIGHTS[pool[i].level]
+                local boost = mod:GetSetBoost(pool[i].id)
+                cumulative = cumulative + baseWeight * boost
                 if roll <= cumulative then
                     result[#result + 1] = pool[i].id
                     table.remove(pool, i)

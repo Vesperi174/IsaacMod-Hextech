@@ -1,11 +1,19 @@
 local mod = HextechMod
 local Pool = mod.HextechPool
 
+local ALLOWED_STAGES = { [1] = true, [2] = true, [4] = true, [6] = true }
+local spawnedStages = {}
+
 function mod:SpawnHextechPedestals()
-    local stage = mod.Game:GetLevel():GetStage()
-    if stage < 1 or stage > mod.HEXTECH_CONFIG.MAX_STAGE then
+    local stage = mod.Game:GetLevel():GetAbsoluteStage()
+    Isaac.ConsoleOutput("[hextech] Stage: " .. stage .. "\n")
+    if not ALLOWED_STAGES[stage] then
         return
     end
+    if spawnedStages[stage] then
+        return
+    end
+    spawnedStages[stage] = true
 
     local tier = Pool:GetRandomTier()
     local items = Pool:GetRandomItems(tier, mod.HEXTECH_CONFIG.PEDESTAL_COUNT)
