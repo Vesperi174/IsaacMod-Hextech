@@ -464,7 +464,7 @@ if EID then
         function(descObj)
             local collected = getSetProgress(DRAGON_FLAME_SET)
             local total = #DRAGON_FLAME_SET
-            local lang = EID.Config and EID.Config.Language or "en_us"
+            local lang = EID:getLanguage()
             local setName = DRAGON_FLAME_NAMES[lang] or DRAGON_FLAME_NAMES.en_us
             local completeText = lang == "zh_cn" and "已集齐！" or "Complete!"
             if collected < total then
