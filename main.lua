@@ -38,6 +38,7 @@ local SCRIPTS = {
     "items.plaguebearer",
     "items.magicmissile",
     "items.doubletap",
+    "items.augment404",
     "sets.set_system",
     "eid_integration",
 }

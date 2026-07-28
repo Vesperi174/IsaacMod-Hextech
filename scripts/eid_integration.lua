@@ -215,6 +215,20 @@ if EID then
         "en_us"
     )
 
+    EID:addCollectible(
+        mod.ITEMS.AUGMENT404,
+        "#你是怎么找到这个的？！？！？！",
+        "404强化符文未找到",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.AUGMENT404,
+        "How did you find this?!?!?",
+        "Hextech Augment 404",
+        "en_us"
+    )
+
     -- L3
     EID:addCollectible(
         mod.ITEMS.APEXINVENTOR,
