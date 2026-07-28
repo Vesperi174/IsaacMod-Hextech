@@ -42,3 +42,7 @@ function mod:SpawnHextechPedestals()
         end
     end
 end
+
+mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, function()
+    spawnedStages = {}
+end)
