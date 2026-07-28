@@ -206,7 +206,7 @@
     cache=""
     description="双发快射！"
     gfx="doubletap.png"
-    quality="2"
+    quality="3"
     set="DragonFlame"
     tags="offensive"
   />

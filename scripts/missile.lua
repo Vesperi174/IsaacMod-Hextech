@@ -55,6 +55,7 @@ function Missile.Fire(player, target, damage, sourceItem)
 
     tear:GetData().isMissile = true
     tear:GetData().sourceItem = sourceItem
+    tear:GetData().doubleTapDone = false
     if target.Position then
         tear:GetData().target = target
     end
