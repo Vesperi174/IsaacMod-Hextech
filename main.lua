@@ -12,6 +12,7 @@ local SCRIPTS = {
     "pedestal_spawner",
     "damage_pipeline",
     "missile",
+    "curse_energy",
     "callbacks",
     "items.tapdancer",
     "items.bluntforce",
