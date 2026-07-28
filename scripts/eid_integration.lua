@@ -478,19 +478,34 @@ if EID then
             local lang = EID:getLanguage()
             local setName = DRAGON_FLAME_NAMES[lang] or DRAGON_FLAME_NAMES.en_us
 
-            local potentialCount = collected + 1
+            local itemId = descObj.ObjSubType
+            local player = Isaac.GetPlayer(0)
+            local alreadyHave = player and player:GetCollectibleNum(itemId, false) > 0
 
-            local setInfo = "\n#" .. setName .. ":"
-            for i = 2, 4 do
-                local line = DRAGON_FLAME_LEVELS[lang][i] or DRAGON_FLAME_LEVELS.en_us[i]
-                if i == potentialCount then
-                    setInfo = setInfo .. "\n#{{ColorYellow}}" .. line .. "{{CR}}"
-                else
+            if alreadyHave then
+                local warningText = lang == "zh_cn" and "你已经有了一个同名海克斯！" or "You already have this hextech!"
+                local setInfo = "\n#" .. setName .. ":"
+                for i = 2, 4 do
+                    local line = DRAGON_FLAME_LEVELS[lang][i] or DRAGON_FLAME_LEVELS.en_us[i]
                     setInfo = setInfo .. "\n#{{ColorGray}}" .. line .. "{{CR}}"
                 end
-            end
+                setInfo = setInfo .. "\n#{{ColorRed}}" .. warningText .. "{{CR}}"
+                descObj.Description = descObj.Description .. setInfo
+            else
+                local potentialCount = collected + 1
 
-            descObj.Description = descObj.Description .. setInfo
+                local setInfo = "\n#" .. setName .. ":"
+                for i = 2, 4 do
+                    local line = DRAGON_FLAME_LEVELS[lang][i] or DRAGON_FLAME_LEVELS.en_us[i]
+                    if i == potentialCount then
+                        setInfo = setInfo .. "\n#{{ColorYellow}}" .. line .. "{{CR}}"
+                    else
+                        setInfo = setInfo .. "\n#{{ColorGray}}" .. line .. "{{CR}}"
+                    end
+                end
+
+                descObj.Description = descObj.Description .. setInfo
+            end
             return descObj
         end
     )
