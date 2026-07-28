@@ -12,28 +12,47 @@ mod.SETS = {
 }
 
 local activatedSets = {}
-local setMessage = ""
-local messageTimer = 0
-local MESSAGE_DURATION = 60 -- 1秒
+local setProgress = {}
+
+local DRAGON_FLAME_CHANCES = {
+    [2] = 0.4,
+    [3] = 0.7,
+    [4] = 1.0,
+}
+
+local function getSetCount(setItems)
+    local player = Isaac.GetPlayer(0)
+    if not player then return 0 end
+    local count = 0
+    for _, itemId in ipairs(setItems) do
+        if player:GetCollectibleNum(itemId, true) > 0 then
+            count = count + 1
+        end
+    end
+    return count
+end
 
 local function checkSetEffects(player)
     for setName, setData in pairs(mod.SETS) do
-        if not activatedSets[setName] then
-            local allCollected = true
-            for _, itemId in ipairs(setData.items) do
-                if player:GetCollectibleNum(itemId, true) == 0 then
-                    allCollected = false
-                    break
-                end
-            end
+        local count = getSetCount(setData.items)
+        setProgress[setName] = count
 
-            if allCollected then
-                activatedSets[setName] = true
-                setMessage = setData.name .. " Set Complete!"
-                messageTimer = MESSAGE_DURATION
-            end
+        if count >= 2 and not activatedSets[setName] then
+            activatedSets[setName] = true
         end
     end
+end
+
+function mod:GetSetProgress(setName)
+    return setProgress[setName] or 0
+end
+
+function mod:GetSetChance(setName)
+    local count = setProgress[setName] or 0
+    if setName == "DragonFlame" then
+        return DRAGON_FLAME_CHANCES[count] or 0
+    end
+    return 0
 end
 
 function mod:FireChainMissile(tear, target)
@@ -51,7 +70,8 @@ function mod:onMissileTakeDamage(entity, amount, flags, source, cooldownFrames)
     local data = srcEntity:GetData()
     if not data or not data.isMissile then return end
 
-    if activatedSets["DragonFlame"] then
+    local chance = mod:GetSetChance("DragonFlame")
+    if chance > 0 and math.random() < chance then
         mod:FireChainMissile(srcEntity, entity)
     end
 end
@@ -60,18 +80,6 @@ mod:AddCallback(ModCallbacks.MC_POST_UPDATE, function()
     local player = Isaac.GetPlayer(0)
     if player then
         checkSetEffects(player)
-    end
-
-    if messageTimer > 0 then
-        messageTimer = messageTimer - 1
-    end
-end)
-
-mod:AddCallback(ModCallbacks.MC_POST_RENDER, function()
-    if messageTimer > 0 and setMessage ~= "" then
-        local sw = Isaac.GetScreenWidth() or 480
-        local sh = Isaac.GetScreenHeight() or 270
-        Isaac.RenderText(setMessage, sw / 2 - 60, sh / 2 - 60, 255, 255, 0, 255)
     end
 end)
 

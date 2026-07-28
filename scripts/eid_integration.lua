@@ -436,6 +436,18 @@ if EID then
         zh_cn = "神龙赤焰",
         en_us = "Dragon Flame",
     }
+    local DRAGON_FLAME_LEVELS = {
+        zh_cn = {
+            [2] = "(2)40% 概率触发飞弹连锁",
+            [3] = "(3)70% 概率触发飞弹连锁",
+            [4] = "(4)100% 概率触发飞弹连锁",
+        },
+        en_us = {
+            [2] = "(2) 40% chain missile chance",
+            [3] = "(3) 70% chain missile chance",
+            [4] = "(4) 100% chain missile chance",
+        },
+    }
 
     local function getSetProgress(setItems)
         local player = Isaac.GetPlayer(0)
@@ -463,17 +475,22 @@ if EID then
         end,
         function(descObj)
             local collected = getSetProgress(DRAGON_FLAME_SET)
-            local total = #DRAGON_FLAME_SET
             local lang = EID:getLanguage()
             local setName = DRAGON_FLAME_NAMES[lang] or DRAGON_FLAME_NAMES.en_us
-            local completeText = lang == "zh_cn" and "已集齐！" or "Complete!"
-            if collected < total then
-                descObj.Description = descObj.Description ..
-                    "\n#{{ColorYellow}}" .. setName .. " (" .. collected .. "/" .. total .. "){{CR}}"
-            else
-                descObj.Description = descObj.Description ..
-                    "\n#{{ColorGreen}}" .. setName .. " (" .. completeText .. "){{CR}}"
+
+            local potentialCount = collected + 1
+
+            local setInfo = "\n#" .. setName .. ":"
+            for i = 2, 4 do
+                local line = DRAGON_FLAME_LEVELS[lang][i] or DRAGON_FLAME_LEVELS.en_us[i]
+                if i == potentialCount then
+                    setInfo = setInfo .. "\n#{{ColorYellow}}" .. line .. "{{CR}}"
+                else
+                    setInfo = setInfo .. "\n#{{ColorGray}}" .. line .. "{{CR}}"
+                end
             end
+
+            descObj.Description = descObj.Description .. setInfo
             return descObj
         end
     )
