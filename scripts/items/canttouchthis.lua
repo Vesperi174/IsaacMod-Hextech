@@ -27,7 +27,7 @@ function mod:onCantTouchThisRender(player)
     local timer = pdata.cantTouchTimer
     if not timer or timer <= 0 then return end
 
-    local seconds = math.ceil(timer / 30)
+    local seconds = math.ceil(timer / 60)
     local sw = Isaac.GetScreenWidth() or 480
     local sh = Isaac.GetScreenHeight() or 270
 
