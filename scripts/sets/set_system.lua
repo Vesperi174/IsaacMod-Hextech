@@ -13,7 +13,7 @@ mod.SETS = {
 }
 
 local activatedSets = {}
-local setProgress = {}
+local playerSetProgress = {}
 
 local DRAGON_FLAME_CHANCES = {
     [2] = 0.4,
@@ -33,9 +33,13 @@ local function getSetCount(setItems, player)
 end
 
 local function checkSetEffects(player)
+    local idx = player.ControllerIndex
+    if not playerSetProgress[idx] then
+        playerSetProgress[idx] = {}
+    end
     for setName, setData in pairs(mod.SETS) do
         local count = getSetCount(setData.items, player)
-        setProgress[setName] = count
+        playerSetProgress[idx][setName] = count
 
         if count >= 2 and not activatedSets[setName] then
             activatedSets[setName] = true
@@ -43,12 +47,16 @@ local function checkSetEffects(player)
     end
 end
 
-function mod:GetSetProgress(setName)
-    return setProgress[setName] or 0
+function mod:GetSetProgress(setName, player)
+    if not player then return 0 end
+    local idx = player.ControllerIndex
+    local sp = playerSetProgress[idx]
+    if not sp then return 0 end
+    return sp[setName] or 0
 end
 
-function mod:GetSetChance(setName)
-    local count = setProgress[setName] or 0
+function mod:GetSetChance(setName, player)
+    local count = mod:GetSetProgress(setName, player)
     if setName == "DragonFlame" then
         return DRAGON_FLAME_CHANCES[count] or 0
     end
@@ -70,7 +78,10 @@ function mod:onMissileTakeDamage(entity, amount, flags, source, cooldownFrames)
     local data = srcEntity:GetData()
     if not data or not data.isMissile then return end
 
-    local chance = mod:GetSetChance("DragonFlame")
+    local player = srcEntity.SpawnerEntity
+    if not player then return end
+
+    local chance = mod:GetSetChance("DragonFlame", player)
     if chance > 0 and math.random() < chance then
         mod:FireChainMissile(srcEntity, entity)
     end
@@ -100,6 +111,20 @@ function mod:GetSetBoost(itemId, player)
         end
     end
     return 1.0
+end
+
+function mod:GetMaxSetProgress(setName)
+    local maxCount = 0
+    for i = 0, Game():GetNumPlayers() - 1 do
+        local player = Isaac.GetPlayer(i)
+        if player then
+            local count = mod:GetSetProgress(setName, player)
+            if count > maxCount then
+                maxCount = count
+            end
+        end
+    end
+    return maxCount
 end
 
 mod:AddCallback(ModCallbacks.MC_POST_UPDATE, function()

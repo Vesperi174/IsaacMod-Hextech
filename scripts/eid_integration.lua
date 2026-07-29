@@ -203,14 +203,14 @@ if EID then
 
     EID:addCollectible(
         mod.ITEMS.DOUBLETAP,
-        "#暂时不写",
+        "#发射飞弹时，额外发射一枚飞弹",
         "双发快射",
         "zh_cn"
     )
 
     EID:addCollectible(
         mod.ITEMS.DOUBLETAP,
-        "#TBD",
+        "#Fires an extra missile when firing a missile",
         "Hextech Double Tap",
         "en_us"
     )
@@ -495,12 +495,19 @@ if EID then
     }
 
     local function getSetProgress(setItems)
-        local player = Isaac.GetPlayer(0)
-        if not player then return 0 end
         local count = 0
-        for _, itemId in ipairs(setItems) do
-            if player:GetCollectibleNum(itemId, true) > 0 then
-                count = count + 1
+        for i = 0, Game():GetNumPlayers() - 1 do
+            local player = Isaac.GetPlayer(i)
+            if player then
+                local pCount = 0
+                for _, itemId in ipairs(setItems) do
+                    if player:GetCollectibleNum(itemId, true) > 0 then
+                        pCount = pCount + 1
+                    end
+                end
+                if pCount > count then
+                    count = pCount
+                end
             end
         end
         return count
