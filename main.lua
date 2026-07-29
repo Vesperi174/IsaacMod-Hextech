@@ -40,6 +40,7 @@ local SCRIPTS = {
     "items.doubletap",
     "items.augment404",
     "items.augment405",
+    "items.hitmepull",
     "sets.set_system",
     "eid_integration",
 }

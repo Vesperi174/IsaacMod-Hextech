@@ -470,6 +470,20 @@ if EID then
         "en_us"
     )
 
+    EID:addCollectible(
+        mod.ITEMS.HITMEPULL,
+        "#受伤时在原地生成炸弹，继承炸弹效果",
+        "打我就给你拉一个",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.HITMEPULL,
+        "#Spawns a bomb when hurt, inherits bomb effects",
+        "Hextech Hit Me and I'll Pull One for You",
+        "en_us"
+    )
+
     -- ===== 套装进度显示 =====
     local DRAGON_FLAME_SET = {
         mod.ITEMS.MAGICMISSILE,
@@ -565,6 +579,52 @@ if EID then
                     end
                 end
 
+                descObj.Description = descObj.Description .. setInfo
+            end
+            return descObj
+        end
+    )
+
+    -- ===== 爆炸就是艺术套装 =====
+    local EXPLOSION_ART_SET = {
+        mod.ITEMS.HITMEPULL,
+    }
+    local EXPLOSION_ART_NAMES = {
+        zh_cn = "爆炸就是艺术",
+        en_us = "Explosion is Art",
+    }
+    local EXPLOSION_ART_LEVELS = {
+        zh_cn = {},
+        en_us = {},
+    }
+
+    local function isExplosionArtItem(itemId)
+        for _, setId in ipairs(EXPLOSION_ART_SET) do
+            if setId == itemId then return true end
+        end
+        return false
+    end
+
+    EID:addDescriptionModifier(
+        "hextech_explosionart_set",
+        function(descObj)
+            return descObj.ObjSubType and isExplosionArtItem(descObj.ObjSubType)
+        end,
+        function(descObj)
+            local collected = getSetProgress(EXPLOSION_ART_SET)
+            local lang = EID:getLanguage()
+            local setName = EXPLOSION_ART_NAMES[lang] or EXPLOSION_ART_NAMES.en_us
+
+            local itemId = descObj.ObjSubType
+            local alreadyHave = playerAlreadyHas(itemId)
+
+            if alreadyHave then
+                local warningText = lang == "zh_cn" and "你已经有了一个同名海克斯！" or "You already have this hextech!"
+                local setInfo = "\n#" .. setName .. ":"
+                setInfo = setInfo .. "\n#{{ColorRed}}" .. warningText .. "{{CR}}"
+                descObj.Description = descObj.Description .. setInfo
+            else
+                local setInfo = "\n#" .. setName .. ":"
                 descObj.Description = descObj.Description .. setInfo
             end
             return descObj

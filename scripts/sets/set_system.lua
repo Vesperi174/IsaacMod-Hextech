@@ -10,6 +10,12 @@ mod.SETS = {
             mod.ITEMS.DOUBLETAP,
         },
     },
+    ExplosionArt = {
+        name = "Explosion is Art",
+        items = {
+            mod.ITEMS.HITMEPULL,
+        },
+    },
 }
 
 local activatedSets = {}

@@ -13,6 +13,7 @@ mod.HextechPool.items = {
 }
 
 mod.HextechPool.LEVEL_WEIGHTS = {
+    [0] = 1.5,
     [1] = 1.0,
     [2] = 0.7,
     [3] = 0.5,
@@ -105,6 +106,7 @@ mod.HextechPool:Register(mod.ITEMS.CANTTOUCHTHIS, mod.HextechPool.PRISMATIC, 4)
 mod.HextechPool:Register(mod.ITEMS.HOMEGUARD, mod.HextechPool.SILVER, 1)
 mod.HextechPool:Register(mod.ITEMS.PLAGUEBEARER, mod.HextechPool.PRISMATIC, 3)
 mod.HextechPool:Register(mod.ITEMS.FANTHEHAMMER, mod.HextechPool.PRISMATIC, 3)
+mod.HextechPool:Register(mod.ITEMS.HITMEPULL, mod.HextechPool.SILVER, 0)
 
 Isaac.ConsoleOutput("[hextech] Prismatic: " .. #mod.HextechPool.items[mod.HextechPool.PRISMATIC] .. "\n")
 Isaac.ConsoleOutput("[hextech] Gold: " .. #mod.HextechPool.items[mod.HextechPool.GOLD] .. "\n")
