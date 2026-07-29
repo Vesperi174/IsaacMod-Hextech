@@ -9,6 +9,7 @@ mod.SETS = {
             mod.ITEMS.FANTHEHAMMER,
             mod.ITEMS.TYPHOON,
             mod.ITEMS.DOUBLETAP,
+            mod.ITEMS.BULLETHEAVEN,
         },
     },
     ExplosionArt = {

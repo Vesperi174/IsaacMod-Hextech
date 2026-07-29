@@ -108,6 +108,7 @@ mod.HextechPool:Register(mod.ITEMS.PLAGUEBEARER, mod.HextechPool.PRISMATIC, 3)
 mod.HextechPool:Register(mod.ITEMS.FANTHEHAMMER, mod.HextechPool.PRISMATIC, 3)
 mod.HextechPool:Register(mod.ITEMS.HITMEPULL, mod.HextechPool.SILVER, 0)
 mod.HextechPool:Register(mod.ITEMS.DODGEPROVOCATION, mod.HextechPool.SILVER, 1)
+mod.HextechPool:Register(mod.ITEMS.BULLETHEAVEN, mod.HextechPool.PRISMATIC, 3)
 
 Isaac.ConsoleOutput("[hextech] Prismatic: " .. #mod.HextechPool.items[mod.HextechPool.PRISMATIC] .. "\n")
 Isaac.ConsoleOutput("[hextech] Gold: " .. #mod.HextechPool.items[mod.HextechPool.GOLD] .. "\n")

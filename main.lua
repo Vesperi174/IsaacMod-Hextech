@@ -29,6 +29,7 @@ local ITEM_SCRIPTS = {
     "items.augment405",
     "items.backtobasics",
     "items.bluntforce",
+    "items.bulletheaven",
     "items.canttouchthis",
     "items.deft",
     "items.dematerialize",

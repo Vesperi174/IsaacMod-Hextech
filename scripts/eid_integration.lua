@@ -498,6 +498,20 @@ if EID then
         "en_us"
     )
 
+    EID:addCollectible(
+        mod.ITEMS.BULLETHEAVEN,
+        "#向所有敌人发射10发飞弹，伤害为攻击力",
+        "弹幕天堂",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.BULLETHEAVEN,
+        "#Fires 10 missiles at every enemy, damage = attack",
+        "Hextech Bullet Heaven",
+        "en_us"
+    )
+
     -- ===== 套装进度显示 =====
     local SET_CONFIGS = {
         DragonFlame = {
@@ -506,6 +520,7 @@ if EID then
                 mod.ITEMS.FANTHEHAMMER,
                 mod.ITEMS.TYPHOON,
                 mod.ITEMS.DOUBLETAP,
+                mod.ITEMS.BULLETHEAVEN,
             },
             names = {
                 zh_cn = "神龙赤焰",

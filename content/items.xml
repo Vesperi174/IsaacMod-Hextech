@@ -251,4 +251,14 @@
     quality="1"
     tags="offensive"
   />
+  <active
+    name="Hextech Bullet Heaven"
+    cache=""
+    description="弹幕天堂！"
+    gfx="bulletheaven.png"
+    quality="3"
+    maxcharges="4"
+    set="DragonFlame"
+    tags="offensive"
+  />
 </items>
