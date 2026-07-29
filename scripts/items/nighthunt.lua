@@ -6,8 +6,15 @@ local FLAG_CONFUSION = EntityFlag and EntityFlag.FLAG_CONFUSION or (1 << 5)
 local confusionTimer = 0
 
 function mod:onNightHuntKill(entity)
-    local player = Isaac.GetPlayer(0)
-    if not player or not player:HasCollectible(mod.ITEMS.NIGHTHUNT) then return end
+    local hasItem = false
+    for i = 0, Game():GetNumPlayers() - 1 do
+        local p = Isaac.GetPlayer(i)
+        if p and p:HasCollectible(mod.ITEMS.NIGHTHUNT) then
+            hasItem = true
+            break
+        end
+    end
+    if not hasItem then return end
 
     confusionTimer = CONFUSION_DURATION
 
@@ -23,7 +30,7 @@ function mod:onNightHuntKill(entity)
     end
 end
 
-function mod:onNightHuntUpdate(player)
+function mod:onNightHuntUpdate()
     if confusionTimer <= 0 then return end
 
     confusionTimer = confusionTimer - 1

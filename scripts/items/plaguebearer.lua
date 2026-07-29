@@ -30,34 +30,42 @@ local function getRoomKey()
 end
 
 function mod:onPlaguebearerNewRoom()
-    local player = Isaac.GetPlayer(0)
-    if not player or not player:HasCollectible(mod.ITEMS.PLAGUEBEARER) then return end
-
-    local roomKey = getRoomKey()
-    lastRoomKey = roomKey
-    if not harvestedRooms[roomKey] then
-        roomEntryFrame = game:GetFrameCount()
+    for i = 0, game:GetNumPlayers() - 1 do
+        local player = Isaac.GetPlayer(i)
+        if player and player:HasCollectible(mod.ITEMS.PLAGUEBEARER) then
+            local roomKey = getRoomKey()
+            lastRoomKey = roomKey
+            if not harvestedRooms[roomKey] then
+                roomEntryFrame = game:GetFrameCount()
+            end
+            return
+        end
     end
 end
 
 function mod:onPlaguebearerUpdate()
-    local player = Isaac.GetPlayer(0)
-    if not player or not player:HasCollectible(mod.ITEMS.PLAGUEBEARER) then return end
+    for i = 0, game:GetNumPlayers() - 1 do
+        local player = Isaac.GetPlayer(i)
+        if not player or not player:HasCollectible(mod.ITEMS.PLAGUEBEARER) then goto continue end
 
-    local idx = player.ControllerIndex
-    local stacks = CurseEnergy.GetStacks(player)
-    local currentThreshold = math.floor(stacks / HEART_THRESHOLD)
-    local prevThreshold = lastThreshold[idx] or 0
+        local idx = player.ControllerIndex
+        local stacks = CurseEnergy.GetStacks(player)
+        local currentThreshold = math.floor(stacks / HEART_THRESHOLD)
+        local prevThreshold = lastThreshold[idx] or 0
 
-    if currentThreshold > prevThreshold then
-        for t = prevThreshold + 1, currentThreshold do
-            for i = 1, t do
-                local ht = HEART_TYPES[math.random(#HEART_TYPES)]
-                local offset = Vector(math.random(-40, 40), math.random(-40, 40))
-                Isaac.Spawn(EntityType.ENTITY_PICKUP, ht.variant, ht.sub, player.Position + offset, Vector.Zero, player)
+        if currentThreshold > prevThreshold then
+            for t = prevThreshold + 1, currentThreshold do
+                for j = 1, t do
+                    local ht = HEART_TYPES[math.random(#HEART_TYPES)]
+                    local offset = Vector(math.random(-40, 40), math.random(-40, 40))
+                    Isaac.Spawn(EntityType.ENTITY_PICKUP, ht.variant, ht.sub, player.Position + offset, Vector.Zero,
+                        player)
+                end
             end
+            lastThreshold[idx] = currentThreshold
         end
-        lastThreshold[idx] = currentThreshold
+
+        ::continue::
     end
 
     local roomKey = getRoomKey()
@@ -83,7 +91,12 @@ function mod:onPlaguebearerUpdate()
         end
 
         if count > 0 then
-            CurseEnergy.AddStacks(player, count)
+            for i = 0, game:GetNumPlayers() - 1 do
+                local player = Isaac.GetPlayer(i)
+                if player and player:HasCollectible(mod.ITEMS.PLAGUEBEARER) then
+                    CurseEnergy.AddStacks(player, count)
+                end
+            end
         end
     end
 end

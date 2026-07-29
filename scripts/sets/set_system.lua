@@ -21,8 +21,7 @@ local DRAGON_FLAME_CHANCES = {
     [4] = 1.0,
 }
 
-local function getSetCount(setItems)
-    local player = Isaac.GetPlayer(0)
+local function getSetCount(setItems, player)
     if not player then return 0 end
     local count = 0
     for _, itemId in ipairs(setItems) do
@@ -35,7 +34,7 @@ end
 
 local function checkSetEffects(player)
     for setName, setData in pairs(mod.SETS) do
-        local count = getSetCount(setData.items)
+        local count = getSetCount(setData.items, player)
         setProgress[setName] = count
 
         if count >= 2 and not activatedSets[setName] then
@@ -104,9 +103,11 @@ function mod:GetSetBoost(itemId, player)
 end
 
 mod:AddCallback(ModCallbacks.MC_POST_UPDATE, function()
-    local player = Isaac.GetPlayer(0)
-    if player then
-        checkSetEffects(player)
+    for i = 0, Game():GetNumPlayers() - 1 do
+        local player = Isaac.GetPlayer(i)
+        if player then
+            checkSetEffects(player)
+        end
     end
 end)
 

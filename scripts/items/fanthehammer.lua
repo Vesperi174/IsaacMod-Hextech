@@ -64,40 +64,44 @@ function mod:onFthDamage(target, amount, flag, source, cooldown)
 end
 
 function mod:onFthUpdate()
-    local player = Isaac.GetPlayer(0)
-    if not player then return end
+    for i = 0, game:GetNumPlayers() - 1 do
+        local player = Isaac.GetPlayer(i)
+        if not player then goto continue end
 
-    local pdata = player:GetData()
+        local pdata = player:GetData()
 
-    if pdata.fthCooldowns then
-        for i = 1, NUM_DIRECTIONS do
-            if pdata.fthCooldowns[i] > 0 then
-                pdata.fthCooldowns[i] = pdata.fthCooldowns[i] - 1
+        if pdata.fthCooldowns then
+            for d = 1, NUM_DIRECTIONS do
+                if pdata.fthCooldowns[d] > 0 then
+                    pdata.fthCooldowns[d] = pdata.fthCooldowns[d] - 1
+                end
             end
         end
+
+        local queue = pdata.fthQueue
+        if not queue then goto continue end
+
+        if queue.remaining <= 0 then
+            pdata.fthQueue = nil
+            goto continue
+        end
+
+        if queue.timer > 0 then
+            queue.timer = queue.timer - 1
+            goto continue
+        end
+
+        local npc = queue.target
+        if not npc or not npc:Exists() then
+            npc = nil
+        end
+
+        mod.Missile.Fire(player, npc or queue.targetPos, queue.damage, mod.ITEMS.FANTHEHAMMER)
+        queue.remaining = queue.remaining - 1
+        queue.timer = MISSILE_DELAY
+
+        ::continue::
     end
-
-    local queue = pdata.fthQueue
-    if not queue then return end
-
-    if queue.remaining <= 0 then
-        pdata.fthQueue = nil
-        return
-    end
-
-    if queue.timer > 0 then
-        queue.timer = queue.timer - 1
-        return
-    end
-
-    local npc = queue.target
-    if not npc or not npc:Exists() then
-        npc = nil
-    end
-
-    mod.Missile.Fire(player, npc or queue.targetPos, queue.damage, mod.ITEMS.FANTHEHAMMER)
-    queue.remaining = queue.remaining - 1
-    queue.timer = MISSILE_DELAY
 end
 
 mod:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, mod.onFthDamage)
@@ -111,17 +115,17 @@ function mod:onFthRender()
     if not sw then sw = 480 end
     if not sh then sh = 270 end
 
-    local hasItem = false
+    local targetPlayer = nil
     for i = 0, game:GetNumPlayers() - 1 do
         local player = Isaac.GetPlayer(i)
         if player and player:HasCollectible(mod.ITEMS.FANTHEHAMMER) then
-            hasItem = true
+            targetPlayer = player
             break
         end
     end
-    if not hasItem then return end
+    if not targetPlayer then return end
 
-    local pdata = Isaac.GetPlayer(0):GetData()
+    local pdata = targetPlayer:GetData()
     local cd = pdata.fthCooldowns
     if not cd then
         cd = { 0, 0, 0, 0 }

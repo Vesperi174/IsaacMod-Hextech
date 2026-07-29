@@ -506,6 +506,16 @@ if EID then
         return count
     end
 
+    local function playerAlreadyHas(itemId)
+        for i = 0, Game():GetNumPlayers() - 1 do
+            local p = Isaac.GetPlayer(i)
+            if p and p:GetCollectibleNum(itemId, false) > 0 then
+                return true
+            end
+        end
+        return false
+    end
+
     local function isDragonFlameItem(itemId)
         for _, setId in ipairs(DRAGON_FLAME_SET) do
             if setId == itemId then return true end
@@ -524,8 +534,7 @@ if EID then
             local setName = DRAGON_FLAME_NAMES[lang] or DRAGON_FLAME_NAMES.en_us
 
             local itemId = descObj.ObjSubType
-            local player = Isaac.GetPlayer(0)
-            local alreadyHave = player and player:GetCollectibleNum(itemId, false) > 0
+            local alreadyHave = playerAlreadyHas(itemId)
 
             if alreadyHave then
                 local warningText = lang == "zh_cn" and "你已经有了一个同名海克斯！" or "You already have this hextech!"

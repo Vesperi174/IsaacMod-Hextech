@@ -1,6 +1,5 @@
 local mod = HextechMod
 
-local tracked = {}
 local augment404Used = false
 
 local HEX_ITEMS = {
@@ -15,41 +14,46 @@ local HEX_ITEMS = {
     mod.ITEMS.MAGICMISSILE, mod.ITEMS.DOUBLETAP,
 }
 
-local function init()
-    local player = Isaac.GetPlayer(0)
-    if not player then return end
+local function initPlayer(player)
+    local pdata = player:GetData()
+    pdata.augmentTracked = {}
     for _, id in ipairs(HEX_ITEMS) do
-        tracked[id] = player:GetCollectibleNum(id, false)
+        pdata.augmentTracked[id] = player:GetCollectibleNum(id, false)
     end
 end
 
 function mod:onAugment404Check()
-    local player = Isaac.GetPlayer(0)
-    if not player then return end
+    for i = 0, Game():GetNumPlayers() - 1 do
+        local player = Isaac.GetPlayer(i)
+        if not player then goto continue end
 
-    if not next(tracked) then
-        init()
-        return
-    end
+        local pdata = player:GetData()
+        if not pdata.augmentTracked then
+            initPlayer(player)
+            goto continue
+        end
 
-    for _, id in ipairs(HEX_ITEMS) do
-        local current = player:GetCollectibleNum(id, false)
-        local previous = tracked[id] or 0
-        if current > previous then
-            if player:HasCollectible(mod.ITEMS.AUGMENT404) then
-                if not player:HasCollectible(mod.ITEMS.AUGMENT405) then
+        for _, id in ipairs(HEX_ITEMS) do
+            local current = player:GetCollectibleNum(id, false)
+            local previous = pdata.augmentTracked[id] or 0
+            if current > previous then
+                if player:HasCollectible(mod.ITEMS.AUGMENT404) then
+                    if not player:HasCollectible(mod.ITEMS.AUGMENT405) then
+                        player:RemoveCollectible(id)
+                        player:RemoveCollectible(mod.ITEMS.AUGMENT404)
+                        player:AddCollectible(mod.ITEMS.AUGMENT405, 0, false)
+                        augment404Used = true
+                    end
+                elseif not augment404Used and math.random(100) == 1 then
                     player:RemoveCollectible(id)
-                    player:RemoveCollectible(mod.ITEMS.AUGMENT404)
-                    player:AddCollectible(mod.ITEMS.AUGMENT405, 0, false)
+                    player:AddCollectible(mod.ITEMS.AUGMENT404, 0, false)
                     augment404Used = true
                 end
-            elseif not augment404Used and math.random(100) == 1 then
-                player:RemoveCollectible(id)
-                player:AddCollectible(mod.ITEMS.AUGMENT404, 0, false)
-                augment404Used = true
             end
+            pdata.augmentTracked[id] = current
         end
-        tracked[id] = current
+
+        ::continue::
     end
 end
 
