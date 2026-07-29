@@ -1,98 +1,16 @@
 local mod = HextechMod
 
-mod.SETS = {
-    DragonFlame = {
-        name = "Dragon Flame",
-        items = {
-            mod.ITEMS.MAGICMISSILE,
-            mod.ITEMS.FANTHEHAMMER,
-            mod.ITEMS.TYPHOON,
-            mod.ITEMS.DOUBLETAP,
-        },
-    },
-    ExplosionArt = {
-        name = "Explosion is Art",
-        items = {
-            mod.ITEMS.HITMEPULL,
-        },
-    },
-}
-
-local activatedSets = {}
-local playerSetProgress = {}
-
-local DRAGON_FLAME_CHANCES = {
-    [2] = 0.4,
-    [3] = 0.7,
-    [4] = 1.0,
-}
-
-local function getSetCount(setItems, player)
-    if not player then return 0 end
-    local count = 0
-    for _, itemId in ipairs(setItems) do
-        if player:GetCollectibleNum(itemId, true) > 0 then
-            count = count + 1
-        end
-    end
-    return count
-end
-
-local function checkSetEffects(player)
-    local idx = player.ControllerIndex
-    if not playerSetProgress[idx] then
-        playerSetProgress[idx] = {}
-    end
-    for setName, setData in pairs(mod.SETS) do
-        local count = getSetCount(setData.items, player)
-        playerSetProgress[idx][setName] = count
-
-        if count >= 2 and not activatedSets[setName] then
-            activatedSets[setName] = true
-        end
-    end
-end
-
+-- 获取玩家套装进度（各套装自行实现 checkSetProgress）
 function mod:GetSetProgress(setName, player)
-    if not player then return 0 end
-    local idx = player.ControllerIndex
-    local sp = playerSetProgress[idx]
-    if not sp then return 0 end
-    return sp[setName] or 0
-end
-
-function mod:GetSetChance(setName, player)
-    local count = mod:GetSetProgress(setName, player)
-    if setName == "DragonFlame" then
-        return DRAGON_FLAME_CHANCES[count] or 0
-    end
     return 0
 end
 
-function mod:FireChainMissile(tear, target)
-    local player = tear.SpawnerEntity
-    if not player or not target then return end
-
-    mod.Missile.Fire(player, target, 1.0, nil)
+-- 获取套装效果触发概率（各套装自行实现）
+function mod:GetSetChance(setName, player)
+    return 0
 end
 
-function mod:onMissileTakeDamage(entity, amount, flags, source, cooldownFrames)
-    if not entity:IsVulnerableEnemy() then return end
-    if not source or not source.Entity then return end
-
-    local srcEntity = source.Entity
-    local data = srcEntity:GetData()
-    if not data or not data.isMissile then return end
-
-    local player = srcEntity.SpawnerEntity
-    if not player then return end
-
-    local chance = mod:GetSetChance("DragonFlame", player)
-    if chance > 0 and math.random() < chance then
-        mod:FireChainMissile(srcEntity, entity)
-    end
-end
-
+-- 套装加成倍率（通用逻辑）
 function mod:GetSetBoost(itemId, player)
     if not player then return 1.0 end
 
@@ -119,6 +37,7 @@ function mod:GetSetBoost(itemId, player)
     return 1.0
 end
 
+-- 获取所有玩家中最高套装进度（用于 EID 显示）
 function mod:GetMaxSetProgress(setName)
     local maxCount = 0
     for i = 0, Game():GetNumPlayers() - 1 do
@@ -132,14 +51,3 @@ function mod:GetMaxSetProgress(setName)
     end
     return maxCount
 end
-
-mod:AddCallback(ModCallbacks.MC_POST_UPDATE, function()
-    for i = 0, Game():GetNumPlayers() - 1 do
-        local player = Isaac.GetPlayer(i)
-        if player then
-            checkSetEffects(player)
-        end
-    end
-end)
-
-mod:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, mod.onMissileTakeDamage)

@@ -15,7 +15,10 @@ local CORE_SCRIPTS = {
     "missile",
     "curse_energy",
     "callbacks",
+    "sets.registry",
     "sets.set_system",
+    "sets.dragonflame",
+    "sets.explosionart",
     "eid_integration",
 }
 
