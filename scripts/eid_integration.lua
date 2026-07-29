@@ -485,26 +485,47 @@ if EID then
     )
 
     -- ===== 套装进度显示 =====
-    local DRAGON_FLAME_SET = {
-        mod.ITEMS.MAGICMISSILE,
-        mod.ITEMS.FANTHEHAMMER,
-        mod.ITEMS.TYPHOON,
-        mod.ITEMS.DOUBLETAP,
-    }
-    local DRAGON_FLAME_NAMES = {
-        zh_cn = "神龙赤焰",
-        en_us = "Dragon Flame",
-    }
-    local DRAGON_FLAME_LEVELS = {
-        zh_cn = {
-            [2] = "(2)40% 概率触发飞弹连锁",
-            [3] = "(3)70% 概率触发飞弹连锁",
-            [4] = "(4)100% 概率触发飞弹连锁",
+    local SET_CONFIGS = {
+        DragonFlame = {
+            items = {
+                mod.ITEMS.MAGICMISSILE,
+                mod.ITEMS.FANTHEHAMMER,
+                mod.ITEMS.TYPHOON,
+                mod.ITEMS.DOUBLETAP,
+            },
+            names = {
+                zh_cn = "神龙赤焰",
+                en_us = "Dragon Flame",
+            },
+            levels = {
+                zh_cn = {
+                    [2] = "(2)40% 概率触发飞弹连锁",
+                    [3] = "(3)70% 概率触发飞弹连锁",
+                    [4] = "(4)100% 概率触发飞弹连锁",
+                },
+                en_us = {
+                    [2] = "(2) 40% chain missile chance",
+                    [3] = "(3) 70% chain missile chance",
+                    [4] = "(4) 100% chain missile chance",
+                },
+            },
         },
-        en_us = {
-            [2] = "(2) 40% chain missile chance",
-            [3] = "(3) 70% chain missile chance",
-            [4] = "(4) 100% chain missile chance",
+        ExplosionArt = {
+            items = {
+                mod.ITEMS.HITMEPULL,
+            },
+            names = {
+                zh_cn = "爆炸就是艺术",
+                en_us = "Explosion is Art",
+            },
+            levels = {
+                zh_cn = {
+                    -- TODO: 占位，待补充套装效果
+                },
+                en_us = {
+                    -- TODO: placeholder, effects TBD
+                },
+            },
         },
     }
 
@@ -537,96 +558,60 @@ if EID then
         return false
     end
 
-    local function isDragonFlameItem(itemId)
-        for _, setId in ipairs(DRAGON_FLAME_SET) do
-            if setId == itemId then return true end
+    -- 构建套装物品到套装ID的映射
+    local itemToSet = {}
+    for setId, config in pairs(SET_CONFIGS) do
+        for _, itemId in ipairs(config.items) do
+            itemToSet[itemId] = setId
         end
-        return false
     end
 
     EID:addDescriptionModifier(
-        "hextech_dragonflame_set",
+        "hextech_set_display",
         function(descObj)
-            return descObj.ObjSubType and isDragonFlameItem(descObj.ObjSubType)
+            return descObj.ObjSubType and itemToSet[descObj.ObjSubType] ~= nil
         end,
         function(descObj)
-            local collected = getSetProgress(DRAGON_FLAME_SET)
-            local lang = EID:getLanguage()
-            local setName = DRAGON_FLAME_NAMES[lang] or DRAGON_FLAME_NAMES.en_us
-
             local itemId = descObj.ObjSubType
+            local setId = itemToSet[itemId]
+            local config = SET_CONFIGS[setId]
+            local lang = EID:getLanguage()
+            local setName = config.names[lang] or config.names.en_us
+            local levels = config.levels[lang] or config.levels.en_us
+
+            local collected = getSetProgress(config.items)
             local alreadyHave = playerAlreadyHas(itemId)
+
+            local setInfo = "\n#" .. setName .. ":"
 
             if alreadyHave then
                 local warningText = lang == "zh_cn" and "你已经有了一个同名海克斯！" or "You already have this hextech!"
-                local setInfo = "\n#" .. setName .. ":"
-                for i = 2, 4 do
-                    local line = DRAGON_FLAME_LEVELS[lang][i] or DRAGON_FLAME_LEVELS.en_us[i]
-                    setInfo = setInfo .. "\n#{{ColorGray}}" .. line .. "{{CR}}"
-                end
-                setInfo = setInfo .. "\n#{{ColorRed}}" .. warningText .. "{{CR}}"
-                descObj.Description = descObj.Description .. setInfo
-            else
-                local potentialCount = collected + 1
-
-                local setInfo = "\n#" .. setName .. ":"
-                for i = 2, 4 do
-                    local line = DRAGON_FLAME_LEVELS[lang][i] or DRAGON_FLAME_LEVELS.en_us[i]
-                    if i == potentialCount then
-                        setInfo = setInfo .. "\n#{{ColorYellow}}" .. line .. "{{CR}}"
-                    else
-                        setInfo = setInfo .. "\n#{{ColorGray}}" .. line .. "{{CR}}"
+                if next(levels) then
+                    for i = 2, 4 do
+                        local line = levels[i]
+                        if line then
+                            setInfo = setInfo .. "\n#{{ColorGray}}" .. line .. "{{CR}}"
+                        end
                     end
                 end
-
-                descObj.Description = descObj.Description .. setInfo
-            end
-            return descObj
-        end
-    )
-
-    -- ===== 爆炸就是艺术套装 =====
-    local EXPLOSION_ART_SET = {
-        mod.ITEMS.HITMEPULL,
-    }
-    local EXPLOSION_ART_NAMES = {
-        zh_cn = "爆炸就是艺术",
-        en_us = "Explosion is Art",
-    }
-    local EXPLOSION_ART_LEVELS = {
-        zh_cn = {},
-        en_us = {},
-    }
-
-    local function isExplosionArtItem(itemId)
-        for _, setId in ipairs(EXPLOSION_ART_SET) do
-            if setId == itemId then return true end
-        end
-        return false
-    end
-
-    EID:addDescriptionModifier(
-        "hextech_explosionart_set",
-        function(descObj)
-            return descObj.ObjSubType and isExplosionArtItem(descObj.ObjSubType)
-        end,
-        function(descObj)
-            local collected = getSetProgress(EXPLOSION_ART_SET)
-            local lang = EID:getLanguage()
-            local setName = EXPLOSION_ART_NAMES[lang] or EXPLOSION_ART_NAMES.en_us
-
-            local itemId = descObj.ObjSubType
-            local alreadyHave = playerAlreadyHas(itemId)
-
-            if alreadyHave then
-                local warningText = lang == "zh_cn" and "你已经有了一个同名海克斯！" or "You already have this hextech!"
-                local setInfo = "\n#" .. setName .. ":"
                 setInfo = setInfo .. "\n#{{ColorRed}}" .. warningText .. "{{CR}}"
-                descObj.Description = descObj.Description .. setInfo
             else
-                local setInfo = "\n#" .. setName .. ":"
-                descObj.Description = descObj.Description .. setInfo
+                local potentialCount = collected + 1
+                if next(levels) then
+                    for i = 2, 4 do
+                        local line = levels[i]
+                        if line then
+                            if i == potentialCount then
+                                setInfo = setInfo .. "\n#{{ColorYellow}}" .. line .. "{{CR}}"
+                            else
+                                setInfo = setInfo .. "\n#{{ColorGray}}" .. line .. "{{CR}}"
+                            end
+                        end
+                    end
+                end
             end
+
+            descObj.Description = descObj.Description .. setInfo
             return descObj
         end
     )
