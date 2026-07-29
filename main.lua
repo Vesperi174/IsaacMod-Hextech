@@ -32,6 +32,7 @@ local ITEM_SCRIPTS = {
     "items.canttouchthis",
     "items.deft",
     "items.dematerialize",
+    "items.dodgeprovocation",
     "items.doubletap",
     "items.fanthehammer",
     "items.hitmepull",

@@ -484,6 +484,20 @@ if EID then
         "en_us"
     )
 
+    EID:addCollectible(
+        mod.ITEMS.DODGEPROVOCATION,
+        "#受伤后5秒内移速×2",
+        "惹不起我躲得起",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.DODGEPROVOCATION,
+        "#{{Speed}} ×2 for 5s after taking damage",
+        "Hextech Dodge Provocation",
+        "en_us"
+    )
+
     -- ===== 套装进度显示 =====
     local SET_CONFIGS = {
         DragonFlame = {

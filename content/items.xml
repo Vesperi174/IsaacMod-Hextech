@@ -243,4 +243,12 @@
     set="ExplosionArt"
     tags="offensive"
   />
+  <passive
+    name="Hextech Dodge Provocation"
+    cache="speed"
+    description="惹不起我躲得起！"
+    gfx="dodgeprovocation.png"
+    quality="1"
+    tags="offensive"
+  />
 </items>
