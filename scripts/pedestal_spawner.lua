@@ -5,7 +5,7 @@ local ALLOWED_STAGES = { [1] = true, [2] = true, [4] = true, [6] = true }
 local spawnedStages = {}
 local currentRunSeed = nil
 
-local function spawnPedestals(items, playerIndex, x, y)
+local function spawnPedestals(items, optionsIndex, x, y)
     if not items or #items == 0 then return end
     local count = #items
     local spacing = mod.HEXTECH_CONFIG.PEDESTAL_SPACING
@@ -22,7 +22,7 @@ local function spawnPedestals(items, playerIndex, x, y)
             nil
         )
         if pedestal then
-            pedestal:ToPickup().OptionsPickupIndex = 1
+            pedestal:ToPickup().OptionsPickupIndex = optionsIndex
         end
     end
 end
@@ -58,7 +58,7 @@ function mod:SpawnHextechPedestals()
 
         local items = Pool:GetRandomItems(tier, mod.HEXTECH_CONFIG.PEDESTAL_COUNT, player)
         local y = yBase + i * playerYOffset
-        spawnPedestals(items, i, center.X, y)
+        spawnPedestals(items, i + 1, center.X, y)
 
         ::continue::
     end
