@@ -5,6 +5,12 @@ local ALLOWED_STAGES = { [1] = true, [2] = true, [4] = true, [6] = true }
 local spawnedStages = {}
 local currentRunSeed = nil
 
+local pendingQueue = {}
+local activeOptionsIndex = nil
+local currentTier = nil
+local nextOptionsIndex = 1
+local processedPlayerCount = 0
+
 local function spawnPedestals(items, optionsIndex, x, y)
     if not items or #items == 0 then return end
     local count = #items
@@ -25,6 +31,54 @@ local function spawnPedestals(items, optionsIndex, x, y)
             pedestal:ToPickup().OptionsPickupIndex = optionsIndex
         end
     end
+    activeOptionsIndex = optionsIndex
+end
+
+local function hasActivePedestals()
+    if not activeOptionsIndex then return false end
+    local entities = Isaac.GetRoomEntities()
+    for _, e in ipairs(entities) do
+        if e.Type == EntityType.ENTITY_PICKUP
+            and e.Variant == PickupVariant.PICKUP_COLLECTIBLE then
+            local pickup = e:ToPickup()
+            if pickup and pickup.OptionsPickupIndex == activeOptionsIndex then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+local function spawnNextInQueue()
+    if #pendingQueue == 0 then
+        activeOptionsIndex = nil
+        return
+    end
+    local entry = table.remove(pendingQueue, 1)
+    spawnPedestals(entry.items, entry.optionsIndex, entry.x, entry.y)
+end
+
+local function enqueuePlayer(playerIndex)
+    local player = Isaac.GetPlayer(playerIndex)
+    if not player then return end
+    local room = Game():GetRoom()
+    local center = room:GetCenterPos()
+    local yBase = center.Y + mod.HEXTECH_CONFIG.PEDESTAL_Y_OFFSET
+    local y = yBase + playerIndex * 40
+
+    local items = Pool:GetRandomItems(currentTier, mod.HEXTECH_CONFIG.PEDESTAL_COUNT, player)
+    table.insert(pendingQueue, {
+        items = items,
+        optionsIndex = nextOptionsIndex,
+        x = center.X,
+        y = y,
+    })
+    nextOptionsIndex = nextOptionsIndex + 1
+    processedPlayerCount = processedPlayerCount + 1
+
+    if not activeOptionsIndex then
+        spawnNextInQueue()
+    end
 end
 
 function mod:SpawnHextechPedestals()
@@ -33,6 +87,11 @@ function mod:SpawnHextechPedestals()
 
     if startSeed ~= currentRunSeed then
         spawnedStages = {}
+        pendingQueue = {}
+        activeOptionsIndex = nil
+        currentTier = nil
+        nextOptionsIndex = 1
+        processedPlayerCount = 0
         currentRunSeed = startSeed
     end
 
@@ -45,21 +104,31 @@ function mod:SpawnHextechPedestals()
     end
     spawnedStages[stage] = true
 
-    local tier = Pool:GetRandomTier()
-    local room = mod.Game:GetRoom()
-    local center = room:GetCenterPos()
-    local yBase = center.Y + mod.HEXTECH_CONFIG.PEDESTAL_Y_OFFSET
-    local playerYOffset = 40
+    currentTier = Pool:GetRandomTier()
+    pendingQueue = {}
+    nextOptionsIndex = 1
+    processedPlayerCount = 0
 
     local numPlayers = mod.Game:GetNumPlayers()
     for i = 0, numPlayers - 1 do
-        local player = Isaac.GetPlayer(i)
-        if not player then goto continue end
-
-        local items = Pool:GetRandomItems(tier, mod.HEXTECH_CONFIG.PEDESTAL_COUNT, player)
-        local y = yBase + i * playerYOffset
-        spawnPedestals(items, i + 1, center.X, y)
-
-        ::continue::
+        enqueuePlayer(i)
     end
 end
+
+local frameCounter = 0
+
+mod:AddCallback(ModCallbacks.MC_POST_UPDATE, function()
+    frameCounter = frameCounter + 1
+    if frameCounter % 10 ~= 0 then return end
+
+    if currentTier then
+        local numPlayers = Game():GetNumPlayers()
+        while numPlayers > processedPlayerCount do
+            enqueuePlayer(processedPlayerCount)
+        end
+    end
+
+    if activeOptionsIndex and not hasActivePedestals() then
+        spawnNextInQueue()
+    end
+end)
