@@ -26,14 +26,14 @@ function mod.HextechPool:Register(itemId, tier, level)
     table.insert(self.items[tier], { id = itemId, level = level or 1 })
 end
 
-function mod.HextechPool:GetRandomItem(tier)
+function mod.HextechPool:GetRandomItem(tier, player)
     if not self.items[tier] or #self.items[tier] == 0 then
         return nil
     end
-    return self:GetRandomItems(tier, 1)[1]
+    return self:GetRandomItems(tier, 1, player)[1]
 end
 
-function mod.HextechPool:GetRandomItems(tier, count)
+function mod.HextechPool:GetRandomItems(tier, count, player)
     if not self.items[tier] or #self.items[tier] == 0 then
         return nil
     end
@@ -49,7 +49,7 @@ function mod.HextechPool:GetRandomItems(tier, count)
         local totalWeight = 0
         for i = 1, #pool do
             local baseWeight = self.LEVEL_WEIGHTS[pool[i].level]
-            local boost = mod:GetSetBoost(pool[i].id)
+            local boost = mod:GetSetBoost(pool[i].id, player)
             totalWeight = totalWeight + baseWeight * boost
         end
 
@@ -61,7 +61,7 @@ function mod.HextechPool:GetRandomItems(tier, count)
             local cumulative = 0
             for i = 1, #pool do
                 local baseWeight = self.LEVEL_WEIGHTS[pool[i].level]
-                local boost = mod:GetSetBoost(pool[i].id)
+                local boost = mod:GetSetBoost(pool[i].id, player)
                 cumulative = cumulative + baseWeight * boost
                 if roll <= cumulative then
                     result[#result + 1] = pool[i].id

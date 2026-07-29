@@ -77,8 +77,7 @@ function mod:onMissileTakeDamage(entity, amount, flags, source, cooldownFrames)
     end
 end
 
-function mod:GetSetBoost(itemId)
-    local player = Isaac.GetPlayer(0)
+function mod:GetSetBoost(itemId, player)
     if not player then return 1.0 end
 
     for _, setData in pairs(mod.SETS) do
