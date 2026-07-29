@@ -31,6 +31,7 @@ local ITEM_SCRIPTS = {
     "items.bluntforce",
     "items.bulletheaven",
     "items.canttouchthis",
+    "items.celestialbody",
     "items.deft",
     "items.dematerialize",
     "items.dodgeprovocation",

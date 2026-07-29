@@ -5,23 +5,21 @@ local DAMAGE_MULTIPLIER = 0.8
 local HEART_CONTAINERS = 4
 local HEAL_AMOUNT = 4
 
-local playerData = {}
-
 function mod:onCelestialBodyUpdate(player)
     if not player:HasCollectible(mod.ITEMS.CELESTIALBODY) then return end
 
-    local idx = player.ControllerIndex
+    local pdata = player:GetData()
     local count = player:GetCollectibleNum(mod.ITEMS.CELESTIALBODY)
 
-    if not playerData[idx] then
-        playerData[idx] = { lastCount = 0 }
+    if not pdata.celestialLastCount then
+        pdata.celestialLastCount = 0
     end
 
-    if count > playerData[idx].lastCount then
-        local diff = count - playerData[idx].lastCount
+    if count > pdata.celestialLastCount then
+        local diff = count - pdata.celestialLastCount
         player:AddMaxHearts(HEART_CONTAINERS * diff * 2, false)
         player:AddHearts(HEAL_AMOUNT * diff * 2)
-        playerData[idx].lastCount = count
+        pdata.celestialLastCount = count
     end
 end
 
