@@ -512,6 +512,20 @@ if EID then
         "en_us"
     )
 
+    EID:addCollectible(
+        mod.ITEMS.DRAWYOURSWORD,
+        "#获得道具「英灵剑」",
+        "亮出你的剑",
+        "zh_cn"
+    )
+
+    EID:addCollectible(
+        mod.ITEMS.DRAWYOURSWORD,
+        "#Grants the Spirit Sword",
+        "Hextech Draw Your Sword",
+        "en_us"
+    )
+
     -- ===== 套装进度显示 =====
     local SET_CONFIGS = {
         DragonFlame = {

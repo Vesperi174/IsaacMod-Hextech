@@ -261,4 +261,12 @@
     set="DragonFlame"
     tags="offensive"
   />
+  <passive
+    name="Hextech Draw Your Sword"
+    cache=""
+    description="亮出你的剑！"
+    gfx="drawyoursword.png"
+    quality="4"
+    tags="offensive"
+  />
 </items>
