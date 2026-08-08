@@ -18,4 +18,15 @@ mod.SETS = {
             mod.ITEMS.HITMEPULL,
         },
     },
+    DiceRoller = {
+        name = "Dice Roller",
+        items = {
+            mod.ITEMS.STATS,
+            mod.ITEMS.STATSONSTATS,
+            mod.ITEMS.STATSONSTATSONSTATS,
+            mod.ITEMS.TRANSMUTEGOLD,
+            mod.ITEMS.TRANSMUTEPRISMATIC,
+            mod.ITEMS.TRANSMUTECHAOS,
+        },
+    },
 }

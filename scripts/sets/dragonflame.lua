@@ -35,8 +35,7 @@ local function checkSetProgress(player)
     end
 end
 
-function mod:GetSetProgress(setName, player)
-    if setName ~= "DragonFlame" then return 0 end
+mod._setProgressGetters.DragonFlame = function(player)
     if not player then return 0 end
     local idx = player.ControllerIndex
     local sp = playerSetProgress[idx]
@@ -44,9 +43,8 @@ function mod:GetSetProgress(setName, player)
     return sp.DragonFlame or 0
 end
 
-function mod:GetSetChance(setName, player)
-    if setName ~= "DragonFlame" then return 0 end
-    local count = mod:GetSetProgress(setName, player)
+mod._setChanceGetters.DragonFlame = function(player)
+    local count = mod:GetSetProgress("DragonFlame", player)
     return DRAGON_FLAME_CHANCES[count] or 0
 end
 

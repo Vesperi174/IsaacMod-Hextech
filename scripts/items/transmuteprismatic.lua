@@ -16,6 +16,7 @@ function mod:onTransmutePrismaticUpdate(player)
 
     local count = player:GetCollectibleNum(mod.ITEMS.TRANSMUTEPRISMATIC)
     player:RemoveCollectible(mod.ITEMS.TRANSMUTEPRISMATIC)
+    player:GetData().diceTransmutePrismatic = true
 
     for i = 1, count do
         local prismaticItem = getPassiveItem(mod.HextechPool.PRISMATIC)

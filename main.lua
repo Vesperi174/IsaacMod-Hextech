@@ -18,6 +18,7 @@ local CORE_SCRIPTS = {
     "sets.registry",
     "sets.set_system",
     "sets.dragonflame",
+    "sets.diceroller",
     "sets.explosionart",
     "eid_integration",
 }

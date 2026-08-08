@@ -16,6 +16,7 @@ function mod:onTransmuteGoldUpdate(player)
 
     local count = player:GetCollectibleNum(mod.ITEMS.TRANSMUTEGOLD)
     player:RemoveCollectible(mod.ITEMS.TRANSMUTEGOLD)
+    player:GetData().diceTransmuteGold = true
 
     for i = 1, count do
         local goldItem = getPassiveItem(mod.HextechPool.GOLD)

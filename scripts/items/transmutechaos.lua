@@ -18,6 +18,7 @@ function mod:onTransmuteChaosUpdate(player)
 
     local count = player:GetCollectibleNum(mod.ITEMS.TRANSMUTECHAOS)
     player:RemoveCollectible(mod.ITEMS.TRANSMUTECHAOS)
+    player:GetData().diceTransmuteChaos = true
 
     for i = 1, count do
         for j = 1, 2 do

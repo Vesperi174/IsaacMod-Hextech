@@ -570,25 +570,46 @@ if EID then
                 },
             },
         },
+        DiceRoller = {
+            items = {
+                mod.ITEMS.STATS,
+                mod.ITEMS.STATSONSTATS,
+                mod.ITEMS.STATSONSTATSONSTATS,
+                mod.ITEMS.TRANSMUTEGOLD,
+                mod.ITEMS.TRANSMUTEPRISMATIC,
+                mod.ITEMS.TRANSMUTECHAOS,
+            },
+            names = {
+                zh_cn = "掷骰狂人",
+                en_us = "Dice Roller",
+            },
+            levels = {
+                zh_cn = {
+                    [2] = "(2)30% 概率随机属性提升",
+                    [3] = "(3)50% 概率随机属性提升",
+                    [4] = "(4)80% 概率随机属性提升",
+                },
+                en_us = {
+                    [2] = "(2) 30% random stat boost",
+                    [3] = "(3) 50% random stat boost",
+                    [4] = "(4) 80% random stat boost",
+                },
+            },
+        },
     }
 
-    local function getSetProgress(setItems)
-        local count = 0
+    local function getSetProgress(setItems, setName)
+        local maxCount = 0
         for i = 0, Game():GetNumPlayers() - 1 do
             local player = Isaac.GetPlayer(i)
             if player then
-                local pCount = 0
-                for _, itemId in ipairs(setItems) do
-                    if player:GetCollectibleNum(itemId, true) > 0 then
-                        pCount = pCount + 1
-                    end
-                end
-                if pCount > count then
-                    count = pCount
+                local count = mod:GetSetProgress(setName, player)
+                if count > maxCount then
+                    maxCount = count
                 end
             end
         end
-        return count
+        return maxCount
     end
 
     local function playerAlreadyHas(itemId)
@@ -622,7 +643,7 @@ if EID then
             local setName = config.names[lang] or config.names.en_us
             local levels = config.levels[lang] or config.levels.en_us
 
-            local collected = getSetProgress(config.items)
+            local collected = getSetProgress(config.items, setId)
             local alreadyHave = playerAlreadyHas(itemId)
 
             local setInfo = "\n#" .. setName .. ":"
