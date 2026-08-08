@@ -49,7 +49,7 @@ function mod:onPlaguebearerUpdate()
         if not player or not player:HasCollectible(mod.ITEMS.PLAGUEBEARER) then goto continue end
 
         local idx = player.ControllerIndex
-        local stacks = CurseEnergy.GetStacks(player)
+        local stacks = CurseEnergy.GetStacks()
         local currentThreshold = math.floor(stacks / HEART_THRESHOLD)
         local prevThreshold = lastThreshold[idx] or 0
 
@@ -91,12 +91,7 @@ function mod:onPlaguebearerUpdate()
         end
 
         if count > 0 then
-            for i = 0, game:GetNumPlayers() - 1 do
-                local player = Isaac.GetPlayer(i)
-                if player and player:HasCollectible(mod.ITEMS.PLAGUEBEARER) then
-                    CurseEnergy.AddStacks(player, count)
-                end
-            end
+            CurseEnergy.AddStacks(count)
         end
     end
 end

@@ -114,22 +114,6 @@ mod:AddCallback(ModCallbacks.MC_POST_UPDATE, function()
 
             player:AddCacheFlags(CacheFlag.CACHE_ALL)
             player:EvaluateItems()
-
-            Isaac.ConsoleOutput("[DiceRoller] P" ..
-                (i + 1) ..
-                " room cleared, " ..
-                count ..
-                "-piece set: " ..
-                awardType ..
-                " +" ..
-                awardValue .. " (roll " .. string.format("%.2f", roll) .. " < " .. string.format("%.2f", chance) .. ")\n")
-        else
-            Isaac.ConsoleOutput("[DiceRoller] P" ..
-                (i + 1) ..
-                " room cleared, " ..
-                count ..
-                "-piece set: failed (roll " ..
-                string.format("%.2f", roll) .. " >= " .. string.format("%.2f", chance) .. ")\n")
         end
 
         ::continue::

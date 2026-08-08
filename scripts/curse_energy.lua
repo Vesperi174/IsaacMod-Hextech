@@ -5,7 +5,7 @@ local CurseEnergy = mod.CurseEnergy
 
 CurseEnergy.relatedItems = {}
 
-CurseEnergy.stacks = {}
+CurseEnergy.stacks = 0
 
 function CurseEnergy.RegisterItem(itemId)
     CurseEnergy.relatedItems[itemId] = true
@@ -20,45 +20,42 @@ function CurseEnergy.HasRelatedItem(player)
     return false
 end
 
-function CurseEnergy.GetStacks(player)
-    local idx = player.ControllerIndex
-    return CurseEnergy.stacks[idx] or 0
+function CurseEnergy.GetStacks()
+    return CurseEnergy.stacks
 end
 
-function CurseEnergy.SetStacks(player, amount)
-    local idx = player.ControllerIndex
-    CurseEnergy.stacks[idx] = math.max(0, amount)
+function CurseEnergy.SetStacks(amount)
+    CurseEnergy.stacks = math.max(0, amount)
 end
 
-function CurseEnergy.AddStacks(player, amount)
-    local idx = player.ControllerIndex
-    CurseEnergy.stacks[idx] = (CurseEnergy.stacks[idx] or 0) + amount
+function CurseEnergy.AddStacks(amount)
+    CurseEnergy.stacks = CurseEnergy.stacks + amount
 end
 
-function CurseEnergy.ResetStacks(player)
-    CurseEnergy.stacks[player.ControllerIndex] = 0
+function CurseEnergy.ResetStacks()
+    CurseEnergy.stacks = 0
 end
 
 function CurseEnergy.ResetAll()
-    CurseEnergy.stacks = {}
+    CurseEnergy.stacks = 0
 end
 
 function mod:onCurseEnergyRender()
     local game = Game()
+    local hasAny = false
     for i = 0, game:GetNumPlayers() - 1 do
         local player = Isaac.GetPlayer(i)
-        if not player then goto continue end
-        if not CurseEnergy.HasRelatedItem(player) then goto continue end
-
-        local stacks = CurseEnergy.GetStacks(player)
-
-        local sw = Isaac.GetScreenWidth() or 480
-        local yOffset = 10 + i * 16
-        local text = "P" .. (i + 1) .. " Curse Energy: " .. tostring(stacks)
-        Isaac.RenderText(text, sw / 2 - 40, yOffset, 180, 100, 255, 255)
-
-        ::continue::
+        if player and CurseEnergy.HasRelatedItem(player) then
+            hasAny = true
+            break
+        end
     end
+    if not hasAny then return end
+
+    local stacks = CurseEnergy.GetStacks()
+    local sw = Isaac.GetScreenWidth() or 480
+    local text = "Curse Energy: " .. tostring(stacks)
+    Isaac.RenderText(text, sw / 2 - 40, 10, 180, 100, 255, 255)
 end
 
 mod:AddCallback(ModCallbacks.MC_POST_RENDER, mod.onCurseEnergyRender)
